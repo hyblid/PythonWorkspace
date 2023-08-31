@@ -10,8 +10,6 @@ root = Tk()
 root.title("Nado GUI")
 
 # 파일 추가
-
-
 def add_file():
     files = filedialog.askopenfilenames(title="이미지 파일을 선택하세요", filetypes=(("PNG 파일", "*.png"), ("모든 파일", "*.*")),
                                         initialdir=r"C:\test\PythonWorkspace")  # 최초에 C:/ 경로를 보여줌
@@ -20,16 +18,12 @@ def add_file():
         list_file.insert(END, file)
 
 # 선택 삭제
-
-
 def del_file():
     print(list_file.curselection)
     for idx in reversed(list_file.curselection()):
         list_file.delete(idx)
 
 # 저장 경로 (폴더)
-
-
 def browse_dest_path():
     folder_selected = filedialog.askdirectory()
     if folder_selected == "":
@@ -38,9 +32,7 @@ def browse_dest_path():
     txt_dest_path.delete(0, END)
     txt_dest_path.insert(0, folder_selected)
 
- # 이미지 통합
-
-
+# 이미지 통합
 def merge_image():
     # print("가로넓이 : " , cmb_width.get())
     # print("간격 : " , cmb_space.get())
@@ -118,9 +110,7 @@ def merge_image():
     except Exception as err:
         msgbox.showerror("에러", err)
 
- # 시작
-
-
+# 시작
 def start():
     # 각 옵션들 값을 확인
     # print("가로넓이 : " , cmb_width.get())
