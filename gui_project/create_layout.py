@@ -4,7 +4,6 @@ import tkinter.messagebox as msgbox
 from tkinter import *
 from tkinter import filedialog
 from PIL import Image
-import time
 
 root = Tk()
 root.title("Nado GUI")
