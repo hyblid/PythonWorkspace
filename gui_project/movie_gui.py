@@ -99,11 +99,49 @@ def refresh_tree():
     
 
 def modify_movie():
-    pass
-
+    global txt_title
+    global txt_year
+    global txt_stars
+    global movie_list
+    # delete each entry values
+    title = txt_title.get()
+    year = txt_year.get()
+    stars = txt_stars.get()
+    index = 0
+    if title != " " and year != " " and stars !=" ":
+        index = index_by_title(movie_list, title)
+        if index != -1:    #update year
+            movie_list[index].year = year
+            movie_list[index].stars = stars
+            print("Moive was modified", movie_list)
+            view_movie()
+    else:
+        print("Please enter entries") 
+    
+    refresh_tree()
+    view_movie()
+    
 
 def delete_movie():
-    pass
+    global txt_title
+    global txt_year
+    global txt_stars
+    global movie_list
+    # delete each entry values
+    title = txt_title.get()
+    year = txt_year.get()
+    stars = txt_stars.get()
+    index = 0
+    if title != " " and year != " " and stars !=" ":
+        index = index_by_title(movie_list, title)
+        if index != -1:    #update year
+            movie_list.pop(index)
+            print("One record was deleted", movie_list)
+    else:
+        print("Please enter entries") 
+    
+    refresh_tree()
+    view_movie()
 
 
 def clear_movie():
@@ -113,6 +151,16 @@ def clear_movie():
     txt_title.delete(0, END)
     txt_year.delete(0, END)
     txt_stars.delete(0, END)
+    
+def index_by_title(movie_list, title):
+    index =0
+    for movie in movie_list:
+        if title == movie.title:
+            print("matched index {}".format(index))
+            return index
+        else:
+            index +=1 
+    return -1   
 
 frame_content_title = Label(frame_movie_detial, text="Title").grid(
     column=0, row=0, sticky=E + W)
