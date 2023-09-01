@@ -25,40 +25,35 @@ label1.pack()
 
 #movie_listBox Frame
 frame_movieListBox = LabelFrame(root, text="Movie")
-frame_movieListBox.pack(fill="both")
-listbox = Listbox(frame_movieListBox, selectmode="extended", height=0).pack()
+frame_movieListBox.pack(padx=10, pady=10, fill="both")
+listbox = Listbox(frame_movieListBox, selectmode="extended", height=10)
+listbox.pack(padx=15, pady=15, fill="both")
 
 #Movie_details Frame
 frame_movie_detial = LabelFrame(root, text="Movie Detail")
-frame_movie_detial.pack(fill="both")
+frame_movie_detial.pack(padx=10, pady=10,fill="both", ipadx=15)
+# win.grid_columnconfigure((0,1,2), weight=1, uniform="column")
 
-frame_content_title = LabelFrame(frame_movie_detial, text="Title")
-frame_content_title.pack()
-txt_stars = Entry(frame_content_title).pack(side="right")
+frame_content_title = Label(frame_movie_detial, text="Title").grid(column=0,row=0, sticky=E+W)
+txt_stars = Entry(frame_movie_detial, width=25).grid(column=0, row=1, padx=30, pady=5, sticky=E+W)
 
-frame_content_year = LabelFrame(frame_movie_detial, text="Year")
-frame_content_year.pack()
-txt_year = Entry(frame_content_year).pack(side="right")
+frame_content_year = Label(frame_movie_detial, text="Year").grid(column=1,row=0, sticky=E+W)
+txt_year = Entry(frame_movie_detial, width=25).grid(column=1,row=1, padx=15, pady=5, sticky=E+W)
 
-frame_content_stars = LabelFrame(frame_movie_detial, text="Star")
-frame_content_stars.pack()
-txt_title = Entry(frame_content_stars).pack(side="right")
+frame_content_stars = Label(frame_movie_detial, text="Star").grid(column=2,row=0, sticky=E+W)
+txt_title = Entry(frame_movie_detial, width=25).grid(column=2,row=1 , padx=15, pady=5, sticky=E+W)
+
 
 #Function_deta1l Frame 
-frame_function_detail1 = LabelFrame(root, text="Operation")
-frame_function_detail1.pack()
-btn_view = Button(frame_function_detail1, text="VIEW")
-btn_view.pack(side="right")
-btn_add = Button(frame_function_detail1, text="ADD")
-btn_add.pack(side="right")
-btn_delete = Button(frame_function_detail1, text="DELETE")
-btn_delete.pack(side="right") 
-btn_modify = Button(frame_function_detail1, text="MODIFY")
-btn_modify.pack(side="right")
-btn_edit = Button(frame_function_detail1, text="EDIT")
-btn_edit.pack(side="right")
-btn_exit = Button(frame_function_detail1, text="EXIT")
-btn_exit.pack(side="right")
+frame_function_detail = LabelFrame(root, text="Operations")
+frame_function_detail.pack(padx=3, pady=3, ipadx=3, ipady=4)
+#Button sfor de
+btn_view = Button(frame_function_detail, text="VIEW", width=15, height=2).grid(column=0,row=0)
+btn_add = Button(frame_function_detail, text="ADD",width=15, height=2).grid(column=1,row=0)
+btn_delete = Button(frame_function_detail, text="DELETE",width=15, height=2, background='yellow').grid(column=2,row=0)
+btn_modify = Button(frame_function_detail, text="MODIFY",width=15, height=2).grid(column=0,row=1)
+btn_edit = Button(frame_function_detail, text="EDIT",width=15, height=2).grid(column=1,row=1)
+btn_exit = Button(frame_function_detail, text="EXIT",width=15, height=2, background='red').grid(column=2,row=1)
 
 movie_list = []
 

@@ -21,3 +21,6 @@ class Movie:
 
     def get_stars(self, stars):
         return self.stars
+
+    def __repr__(self):
+        return f"Movie('Title:{self.title}', 'Year:{self.year}', 'Stars:{self.stars}' )"
