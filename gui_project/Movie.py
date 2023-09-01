@@ -1,12 +1,9 @@
 class Movie:
-    def __init__(self, idx, title, year, stars):
-        self.idx = idx
+    def __init__(self, title, year, stars):
         self.title = title
         self.year = year
         self.stars = stars
-        
-    def set_idx(self, idx):
-        self.idx = idx
+
 
     def set_title(self, title):
         self.title = title
@@ -16,9 +13,6 @@ class Movie:
 
     def set_stars(self, stars):
         self.stars = stars
-
-    def get_title(self, idx):
-        return self.idx
 
     def get_title(self, title):
         return self.title
@@ -30,4 +24,4 @@ class Movie:
         return self.stars
 
     def __repr__(self):
-        return f"Movie('Index:{self.idx}', 'Title:{self.title}', 'Year:{self.year}', 'Stars:{self.stars}')"
+        return f"Movie('Title:{self.title}', 'Year:{self.year}', 'Stars:{self.stars}')"
