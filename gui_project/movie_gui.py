@@ -23,12 +23,12 @@ frame_title = Frame(root, relief="solid", bd=1).pack()
 label1 = Label(frame_title, text="Movie List", font=("Arial", 25))
 label1.pack()
 
-#movie_list Frame
-frame_movieList = LabelFrame(root, text="Movie")
-frame_movieList.pack(fill="both")
-listbox = Listbox(frame_movieList, selectmode="extended", height=0).pack()
+#movie_listBox Frame
+frame_movieListBox = LabelFrame(root, text="Movie")
+frame_movieListBox.pack(fill="both")
+listbox = Listbox(frame_movieListBox, selectmode="extended", height=0).pack()
 
-#Movie_detail Frame
+#Movie_details Frame
 frame_movie_detial = LabelFrame(root, text="Movie Detail")
 frame_movie_detial.pack(fill="both")
 
@@ -60,10 +60,8 @@ btn_edit.pack(side="right")
 btn_exit = Button(frame_function_detail1, text="EXIT")
 btn_exit.pack(side="right")
 
-
-
-
 movie_list = []
+
 
 root.resizable(False, False) # x(너비), y(높이) 값 변경 불가 (창 크기 변경 불가)
 
