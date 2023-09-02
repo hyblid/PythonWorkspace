@@ -11,6 +11,8 @@ movie_list = [Movie("Casablancd", 1942, 5),
 
 '''
 main functions
+? Remove all global variable for GUI
+
 '''
 style = ttk.Style()
 style.theme_use('clam')
@@ -54,7 +56,6 @@ def view_movie():
                     values=(movie.title, movie.year, movie.stars))
     tree.bind("<Double-1>", OnDoubleClick)
     tree.pack()
-
 
 def OnDoubleClick(event):
     global txt_title
