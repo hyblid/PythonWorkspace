@@ -18,13 +18,7 @@ root.resizable(False, False)
 
 # Use a Label to show the title
 # 'font' lets us set a font
-title = tk.Label(
-  root,
-  text='Please take the survey',
-  font=('Arial 16 bold'),
-  bg='brown',
-  fg='#FF0'
-)
+title = tk.Label(root, text='Please take the survey', font=('Arial 16 bold'), bg='brown', fg='#FF0')
 
 
 # Use string vars for strings
@@ -34,36 +28,21 @@ name_inp = tk.Entry(root, textvariable=name_var)
 
 # Use boolean var for True/False
 eater_var = tk.BooleanVar()
-eater_inp = tk.Checkbutton(
-  root, variable=eater_var, text='Check this box if you eat bananas'
-)
+eater_inp = tk.Checkbutton(root, variable=eater_var, text='Check this box if you eat bananas')
 
 # Use int var for whole numbers
 # Value can set a default
 num_var = tk.IntVar(value=3)
 num_label = tk.Label(text='How many bananas do you eat per day?')
 # note that even with an intvar, the key is still 'textvariable'
-num_inp = tk.Spinbox(
-  root,
-  textvariable=num_var,
-  from_=0,
-  to=1000,
-  increment=1
-)
+num_inp = tk.Spinbox(root, textvariable=num_var, from_=0, to=1000, increment=1)
 
 # Listboxes don't work well with variables,
 # However OptionMenu works great!
 color_var = tk.StringVar(value='Any')
-color_label = tk.Label(
-  root,
-  text='What is the best color for a banana?'
-)
-color_choices = (
-  'Any', 'Green', 'Green Yellow', 'Yellow', 'Brown Spotted', 'Black'
-)
-color_inp = tk.OptionMenu(
-  root, color_var, *color_choices
-)
+color_label = tk.Label(root, text='What is the best color for a banana?')
+color_choices = ('Any', 'Green', 'Green Yellow', 'Yellow', 'Brown Spotted', 'Black')
+color_inp = tk.OptionMenu(root, color_var, *color_choices)
 
 plantain_label = tk.Label(root, text='Do you eat plantains?')
 # Use a Frame to keep widgets together
@@ -75,18 +54,8 @@ plantain_frame = tk.Frame(root)
 plantain_var = tk.BooleanVar()
 # The radio buttons are connected by using the same variable
 # The value of the var will be set to the button's 'value' property value
-plantain_yes_inp = tk.Radiobutton(
-  plantain_frame,
-  text='Yes',
-  value=True,
-  variable=plantain_var
-)
-plantain_no_inp = tk.Radiobutton(
-  plantain_frame,
-  text='Ewww, no!',
-  value=False,
-  variable=plantain_var
-)
+plantain_yes_inp = tk.Radiobutton(plantain_frame, text='Yes', value=True, variable=plantain_var)
+plantain_no_inp = tk.Radiobutton(plantain_frame, text='Ewww, no!', value=False, variable=plantain_var)
 
 # The Text widget doesn't support variables, sadly
 # There is no analogous widget that does
@@ -99,12 +68,7 @@ submit_btn = tk.Button(root, text='Submit Survey')
 
 # Labels can use a StringVar for their contents
 output_var = tk.StringVar(value='')
-output_line = tk.Label(
-  root,
-  textvariable=output_var,
-  anchor='w',
-  justify='left'
-)
+output_line = tk.Label(root, textvariable=output_var, anchor='w', justify='left')
 
 
 #######################
