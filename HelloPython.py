@@ -1,13 +1,17 @@
-kor = ["사과", "바나나", "오렌지"]
-eng = ["apple", "banana", "orange"]
+myList = [1,2,3,4,5]
+myTuple = (1,2,3,4,5)
+mySet= {1,2,3,4,5}
+myDictionary = { 1:"one" , 2:"two"}
+myDictionary.get("one", "can use")
 
-print(list(zip(kor, eng)))
+for s in mySet:
+     print(s)
 
-mixed = [('사과', 'apple'), ('바나나', 'banana'), ('오렌지', 'orange')]
+for l in myList:
+     print(s)
 
-print(list(zip(*mixed)))
+for t in myTuple:
+      print(s)
 
-kor2, eng2 = zip(*mixed)
-
-print(kor2)
-print(eng2)
+for key, value in myDictionary.items():
+      print("Key:", key, "Value:", value)
