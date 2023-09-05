@@ -22,8 +22,8 @@ class Application(tk.Tk):
 
     self.recordform = v.DataRecordForm(self, self.model)
     self.recordform.grid(row=1, padx=10, sticky=(tk.W + tk.E))
+    #  in views.py ---> self.event_generate('<<SaveRecord>>')
     self.recordform.bind('<<SaveRecord>>', self._on_save)
-
     # status bars
     self.status = tk.StringVar()
     self.statusbar = ttk.Label(self, textvariable=self.status)
