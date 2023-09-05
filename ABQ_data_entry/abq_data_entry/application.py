@@ -18,17 +18,13 @@ class Application(tk.Tk):
     self.title("ABQ Data Entry Application")
     self.columnconfigure(0, weight=1)
 
-    ttk.Label(
-      self,
-      text="ABQ Data Entry Application",
-      font=("TkDefaultFont", 16)
-    ).grid(row=0)
+    ttk.Label(self, text="ABQ Data Entry Application", font=("TkDefaultFont", 16)).grid(row=0)
 
     self.recordform = v.DataRecordForm(self, self.model)
     self.recordform.grid(row=1, padx=10, sticky=(tk.W + tk.E))
     self.recordform.bind('<<SaveRecord>>', self._on_save)
 
-    # status bar
+    # status bars
     self.status = tk.StringVar()
     self.statusbar = ttk.Label(self, textvariable=self.status)
     self.statusbar.grid(sticky=(tk.W + tk.E), row=3, padx=10)

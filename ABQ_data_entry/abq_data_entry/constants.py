@@ -10,3 +10,4 @@ class FieldTypes(Enum):
   decimal = auto()
   integer = auto()
   boolean = auto()
+  

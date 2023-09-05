@@ -35,3 +35,9 @@ for t in fields["Time"].get("values"):
     print(f"time {t}")
     
 print(fields.keys())
+
+#find key from value
+mydict = {'george':16,'amber':19}
+res = dict((v,k) for k,v in mydict.items())
+print(res) # Prints george
+

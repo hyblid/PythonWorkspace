@@ -30,7 +30,6 @@ class CSVModel:
 
 
   def __init__(self):
-
     datestring = datetime.today().strftime("%Y-%m-%d")
     filename = "abq_data_record_{}.csv".format(datestring)
     self.file = Path(filename)
