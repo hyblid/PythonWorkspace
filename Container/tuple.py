@@ -1,5 +1,4 @@
 tuple1 = (10, "John", "Howard", 3.3)
-
 print(tuple1)
 
 print("After count()->", tuple1.count(10))
@@ -7,7 +6,6 @@ print("After len()->", len(tuple1))
 
 print("After index()->", tuple1.index("Howard"))
 print("After acess()->", tuple1[1])
-
 
 #copy
 tuple2 = tuple1    
