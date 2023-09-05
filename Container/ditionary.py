@@ -11,7 +11,7 @@ print("After get()->", car1.get("brand"))
 car1.pop("brand")
 print("after pop()->",car1)
 
-car1.update({"brand" : "Ford"})
+car1.update({"brand" : "Ford", "price": 100})
 print("after update()->",car1)
 
 #pop last item
