@@ -10,7 +10,7 @@ class CSVModel:
 
   fields = {
     "Date": {'req': True, 'type': FT.iso_date_string},
-    "Time": {'req': True, 'type': FT.string_list,'values': ['8:00', '12:00', '16:00', '20:00']    },
+    "Time": {'req': True, 'type': FT.string_list,'values': ['8:00', '12:00', '16:00', '20:00']},
     "Technician": {'req': True, 'type':  FT.string},
     "Lab": {'req': True, 'type': FT.short_string_list,'values': ['A', 'B', 'C']},
     "Plot": {'req': True, 'type': FT.string_list,'values': [str(x) for x in range(1, 21)]},

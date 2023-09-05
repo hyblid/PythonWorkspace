@@ -26,5 +26,12 @@ print("After formkeys()->", thisdict)
 thisdict.clear()
 print("After clear()->", thisdict)
 
+""" How to aceess Dictionary of Dictionary"""
+fields = {
+    "Date": {'req': True, 'values':10000},
+    "Time": {'req': True, 'values': ['8:00', '12:00', '16:00', '20:00']}}
 
-
+for t in fields["Time"].get("values"):
+    print(f"time {t}")
+    
+print(fields.keys())
