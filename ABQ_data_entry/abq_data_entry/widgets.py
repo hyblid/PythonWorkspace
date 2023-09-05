@@ -350,7 +350,8 @@ class LabelInput(ttk.Frame):
   def __init__(
     self, parent, label, var, input_class=None,
     input_args=None, label_args=None, field_spec=None,
-    disable_var=None, **kwargs):
+    disable_var=None, **kwargs
+  ):
     super().__init__(parent, **kwargs)
     input_args = input_args or {}
     label_args = label_args or {}
