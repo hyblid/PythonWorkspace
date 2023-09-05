@@ -5,7 +5,7 @@ print("After keys", car1.keys())
 print("After keys", car1.values())
 
 car2 = car1.copy()
-print("After copy1", car2.items())
+print("After copy1", car2)
 print("After get", car1.get("brand"))
 
 car1.pop("brand")

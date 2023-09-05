@@ -10,6 +10,7 @@ print("After append", _list)
 
 _list.remove(6)
 print("After remove", _list)
+
 _list.insert(5, 6)
 print("After insert", _list)
 
