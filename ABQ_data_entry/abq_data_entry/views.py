@@ -173,7 +173,7 @@ class DataRecordForm(tk.Frame):
 
     # default the form
     self.reset()
-
+# in Application   self.recordform.bind('<<SaveRecord>>', self._on_save)
   def _on_save(self):
     self.event_generate('<<SaveRecord>>')
 
