@@ -30,15 +30,10 @@ def pl_sentence2(filename="example.txt"):
     ['abc def ghi', 'jkl mno pqr', 'stu vwx yz']
     """
 def pl_sentence3():
-    # sentence[0] = 'abc def ghi'
-    # sentence[1] = 'jkl mno pqr'
-    # sentence[2] = 'stu vwx yz'
-    #['abc jkl stu', 'def mno vwx', 'ghi pqr yz'].
-    
+    #["abc def ghi","jkl mno pqr","stu vwx yz"]
     list_of_words = ['abc def ghi', 'jkl mno pqr', 'stu vwx yz']
     return [' '.join(t)
-            for t in (zip(*[s.split()
-                            for s in list_of_words]))]
+            for t in (zip(*[s.split() for s in list_of_words]))]
     
     print(output)
     
