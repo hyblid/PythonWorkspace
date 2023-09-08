@@ -1,4 +1,6 @@
-"""Global constants and classes needed by other modules in ABQ Data Entry"""
+"""
+Global constants and classes needed by other modules in ABQ Data Entry
+"""
 from enum import Enum, auto
 
 class FieldTypes(Enum):

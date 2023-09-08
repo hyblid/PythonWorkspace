@@ -9,9 +9,9 @@ def strsort2(full_name):
     
 def strsort3(filename):
     output = ''
-    for one_line in open(filename):
-        for one_word in one_line.split():
-            if not one_word.isalpha():
+    for one_line in open(filename): # read each line
+        for one_word in one_line.split(): # split each word
+            if not one_word.isalpha(): # check word is alphabet
                 continue
             if one_word > output:
                 output = one_word

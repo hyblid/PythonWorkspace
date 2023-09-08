@@ -1,6 +1,5 @@
 """
 The application/controller class for Movie Data Entry
-Controller has Model and View
 """
 
 import tkinter as tk
@@ -16,17 +15,34 @@ class Application(tk.Tk):
         self.model = m.Movie("Terminator", "1999","5")
         self.title("Movie Data Entry Application")
         self.columnconfigure(0, weight=1)
+        self.geometry("650x300")
 
         ttk.Label(self, text="Movie Data Entry Application", font=("TkDefaultFont", 16)).grid(row=0)
 
         self.recordform = v.DataRecordForm(self, self.model)
         self.recordform.grid(row=1, padx=10, sticky=(tk.W + tk.E))
         #  in views.py ---> self.event_generate('<<SaveRecord>>')
-        # self.recordform.bind('<<SaveRecord>>', self._on_save)
+        self.recordform.bind('<<DeleteRecord>>', self._on_delete)
+        self.recordform.bind('<<ResetRecord>>', self._on_reset)
+        self.recordform.bind('<<<ModifyRecord>>', self._on_modify)
+        self.recordform.bind('<<SaveRecord>>', self._on_save)
+        self.recordform.bind('<<ViewRecord>>', self._on_view)
         
         # status bars
-        self.status = tk.StringVar()
-        self.statusbar = ttk.Label(self, textvariable=self.status)
-        self.statusbar.grid(sticky=(tk.W + tk.E), row=3, padx=10)
+        # self.status = tk.StringVar()
+        # self.statusbar = ttk.Label(self, textvariable=self.status)
+        # self.statusbar.grid(sticky=(tk.W + tk.E), row=3, padx=10)
 
-        self._records_saved = 0
+        # self._records_saved = 0
+        
+    def _on_save():
+        pass    
+    def _on_view():
+        pass    
+    def _on_modify():
+        pass    
+    def _on_reset():
+        pass    
+    def _on_delete():
+        pass    
+    
