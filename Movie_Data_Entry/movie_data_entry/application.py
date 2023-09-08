@@ -1,5 +1,6 @@
 """
 The application/controller class for Movie Data Entry
+Controller has Model and View
 """
 
 import tkinter as tk

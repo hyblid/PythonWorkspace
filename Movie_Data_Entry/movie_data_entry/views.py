@@ -1,8 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 from datetime import datetime
-from . import widgets as w
 from .constants import FieldTypes as FT
+from . import widgets as w
+"""
+View has widgets
+"""
 
 class DataRecordForm(tk.Frame):
   """The input form for our widgets"""
