@@ -1,16 +1,26 @@
-print("(1) create new file")
-print("(2) print file")
-print("(3) add new item in file")
-choice = input("Enter your chlice: ")
+import sqlite3
 
-if (choice == "1"):
-    f = open("sample.txt", "w")    
-elif (choice =="2"):
-    f = open("sample.txt", "r")
-    print(f.read())
-    f.close()
-elif (choice == "3"):
-    item = input("enter your item: ")
-    f = open("sample.txt", "a")
-    f.write(item + "\n") 
-    f.close()
+with sqlite3.connect("movie.db") as db:
+    cursor = db.cursor()
+    
+    cursor.execute("""CREATE TABLE IF NOT EXISTS MOVIES (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title text NOT NULL,
+        year text NOT NULL,
+        stars text NOT NULL);""")
+    
+    cursor.execute("""INSERT INTO movies (title, year, stars) 
+                 VALUES("terminaotr", "1955", "4")""")
+    db.commit()
+    
+    title = input("Enter TITLE: ")
+    year = input("Enter YEAR: ")
+    stars = input("Enter STARS  : ")
+    cursor.execute("""INSERT INTO movies (title, year, stars) VALUES(?,?,?)""", 
+                  (title, year, stars))
+    
+    db.commit()
+    
+    cursor.execute("SELECT * FROM MOVIES")
+    print(cursor.fetchall())
+                 

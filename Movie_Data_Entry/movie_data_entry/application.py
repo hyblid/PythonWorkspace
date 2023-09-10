@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import ttk
 from . import views as v
 from . import models as m
-
+import sqlite3
 
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -36,7 +36,18 @@ class Application(tk.Tk):
         # self._records_saved = 0
         
     def _on_save():
-        pass    
+        #with sqlite3.connect("compayny,db") as db:
+            # cursor = db.cursor()
+            # cursor.execute("""CREATE TABLE IF NOT EXISTS EMPLOYEES (
+            #       id integer PRIMARY KEY AUTO_INCREMENT,
+            #       name text NOT NULL,
+            #       dept text NOT NULL,
+            #       salary integer);""")
+    
+            # cursor.execute("""INSERT INTO employees (id,name,dept,salary) 
+            #       VALUES("1", "bob", "Sales", "25000")""")
+            # db.commit()
+        pass     
     def _on_view():
         pass    
     def _on_modify():
