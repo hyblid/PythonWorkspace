@@ -10,12 +10,14 @@ import sqlite3
 
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
+        self.IVORY = "#FFE4C0"
         super().__init__(*args, **kwargs)
 
         self.model = m.Movie("Terminator", "1999","5")
         self.title("Movie Data Entry Application")
         self.columnconfigure(0, weight=1)
         self.geometry("650x300")
+        self.config(padx=5, pady=5, bg=self.IVORY)
 
         ttk.Label(self, text="Movie Data Entry Application", font=("TkDefaultFont", 16)).grid(row=0)
 
