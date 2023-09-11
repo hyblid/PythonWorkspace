@@ -54,11 +54,7 @@ class DataRecordForm(tk.Frame):
     self.viewbutton = ttk.Button(self.buttons, text="View", width= 15, command=self._on_view)
     self.viewbutton.pack(side=tk.RIGHT, padx=3, pady=2)
   
-  def  reset_entry(self):
-    self.txt_title.delete(0,tk.END)
-    self.txt_year.delete(0,tk.END)
-    self.txt_stars.delete(0,tk.END)
-    
+  
     # in Application   self.recordform.bind('<<SaveRecord>>', self._on_save)
   def _on_delete(self):
     self.event_generate('<<DeleteRecord>>')

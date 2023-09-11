@@ -80,11 +80,15 @@ class Application(tk.Tk):
                     (title, year, stars))
             db.commit()
             
-            self.recordform.reset_entry() 
+            # self.recordform.reset_entry() 
+            self._on_reset()
             cursor.execute("SELECT * FROM MOVIES")
             print("Record was saved", cursor.fetchall())  
 
     def _on_view(self, *_):
+        #clear before clicked view
+        self._on_reset()
+        
         with sqlite3.connect(self.DB_NAME) as db:
             cursor = db.cursor()
      # Delete for refresh tree not duplicate s
@@ -103,15 +107,17 @@ class Application(tk.Tk):
             for movie in cursor.fetchall():
                     self.recordform.tree.insert('', 'end', text="item",
                             values=(movie[0], movie[1], movie[2], movie[3]))
-        
-            # self.tree.bind("<Double-1>", OnDoubleClick)
             print("Treeview was displayed!",cursor.fetchall())
             
         
     def _on_modify(self, *_):
         pass    
     def _on_reset(self, *_):
-        pass    
+        self.recordform.tree.delete(*self.recordform.tree.get_children())
+        self.recordform.txt_title.delete(0, tk.END)  
+        self.recordform.txt_year.delete(0, tk.END)  
+        self.recordform.txt_stars.delete(0, tk.END)  
+        self.recordform.update()   
     def _on_delete(self, *_):
         pass    
     
