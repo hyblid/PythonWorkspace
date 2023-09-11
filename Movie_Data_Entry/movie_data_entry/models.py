@@ -13,10 +13,10 @@ class Movie:
     "Stars": {'req': True, 'type':  FT.string},
     }
     
-    def __init__(self, title, year, stars):
-        self.title = title
-        self.year = year
-        self.stars = stars
+    def __init__(self):
+        # self.title = title
+        # self.year = year
+        # self.stars = stars
         
         datestring = datetime.today().strftime("%Y-%m-%d")
         filename = "movie_data_record_{}.csv".format(datestring)
@@ -31,16 +31,16 @@ class Movie:
            msg = f'Permission denied accessing file: {filename}'
            raise PermissionError(msg)
      
-    def save_record(self, data):
-        """Save a dict of data to the CSV file"""
-        newfile = not self.file.exists()
+    # def save_record(self, data):
+    #     """Save a dict of data to the CSV file"""
+    #     newfile = not self.file.exists()
 
-        with open(self.file, 'a', newline='') as fh:
-            csvwriter = csv.DictWriter(fh, fieldnames=self.fields.keys())
-            if newfile:
-             csvwriter.writeheader()
+    #     with open(self.file, 'a', newline='') as fh:
+    #         csvwriter = csv.DictWriter(fh, fieldnames=self.fields.keys())
+    #         if newfile:
+    #          csvwriter.writeheader()
 
-            csvwriter.writerow(data)        
+    #         csvwriter.writerow(data)        
         
         
     def set_title(self, title):

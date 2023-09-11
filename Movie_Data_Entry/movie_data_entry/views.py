@@ -3,9 +3,7 @@ from tkinter import ttk
 
 class DataRecordForm(tk.Frame):
   """The input form for our widgets"""
-  def reset():
-    pass
-  
+ 
   def __init__(self, parent, model, *args, **kwargs):
     super().__init__(parent, *args, **kwargs)
 
@@ -17,11 +15,14 @@ class DataRecordForm(tk.Frame):
 
     # Record info section
     self.treeview_frame = tk.LabelFrame(self, text="Movie Record", height= 200)
-    self.treeview_frame.grid(sticky=tk.W + tk.E)
-    self.tree = ttk.Treeview(self.treeview_frame, column=("Title", "Year", "Stars"), show='headings', height=5)
-    self.tree.grid(sticky=tk.W + tk.E, ipadx= 1, ipady=1, column=0, row=0)
-    self.scrollbar = ttk.Scrollbar(self.treeview_frame, orient=tk.VERTICAL)
-    self.scrollbar.grid(sticky=tk.N + tk.S + tk.W, column=1, row=0)
+    self.treeview_frame.grid()
+
+    self.tree = ttk.Treeview(self.treeview_frame, column=("id", "Title", "Year", "Stars"),
+                             selectmode='browse',show='headings', height=5)
+    self.tree.grid(sticky=tk.W + tk.E, ipadx= 1, ipady=1, column=1, row=0)
+  
+    self.scrollbar = ttk.Scrollbar(self.treeview_frame, orient=tk.VERTICAL, command=self.tree.yview)
+    self.scrollbar.grid(sticky=tk.N + tk.S + tk.W, column=0, row=0)
 
     #entries
     self.entry_frame = tk.LabelFrame(self, text="Movie Detail")
@@ -52,9 +53,12 @@ class DataRecordForm(tk.Frame):
     self.savebutton.pack(side=tk.RIGHT, padx=3, pady=2)
     self.viewbutton = ttk.Button(self.buttons, text="View", width= 15, command=self._on_view)
     self.viewbutton.pack(side=tk.RIGHT, padx=3, pady=2)
-
-    # default the form
-  reset()
+  
+  def  reset_entry(self):
+    self.txt_title.delete(0,tk.END)
+    self.txt_year.delete(0,tk.END)
+    self.txt_stars.delete(0,tk.END)
+    
     # in Application   self.recordform.bind('<<SaveRecord>>', self._on_save)
   def _on_delete(self):
     self.event_generate('<<DeleteRecord>>')
