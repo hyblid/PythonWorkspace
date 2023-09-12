@@ -26,14 +26,14 @@ class Application(tk.Tk):
         self.title("Movie Data Entry Application")
         self.columnconfigure(0, weight=1)
         self.geometry("650x350")
-        self.config(padx=5, pady=5, bg=PINK)
+        self.config(padx=5, pady=5)
         self.resizable(True, True)
         
         # style = ttk.Style()
         # style.theme_use('clam')
 
         ttk.Label(self, text="Movie Data Entry Application", 
-                  font=("TkDefaultFont", 16), background=PINK).grid(row=0)
+                  font=("TkDefaultFont", 16)).grid(row=0)
 
         self.recordform = v.DataRecordForm(self, self.model)
         self.recordform.grid(row=1, padx=10, sticky=(tk.W + tk.E))

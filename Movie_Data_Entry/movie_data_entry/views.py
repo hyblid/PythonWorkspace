@@ -41,17 +41,17 @@ class DataRecordForm(tk.Frame):
     #buttons
     self.buttons = tk.LabelFrame(self, text="Operations")
     self.buttons.grid(sticky=tk.W + tk.E)
-    self.exitbutton = ttk.Button(self.buttons, text="Exit", width= 15, command=self.quit)
+    self.exitbutton =tk.Button(self.buttons, text="Exit", width= 12, command=self.quit)
     self.exitbutton.pack(side=tk.RIGHT, padx=3, pady=2)
-    self.deletebutton = ttk.Button(self.buttons, text="Delete", width= 15, command=self._on_delete)
+    self.deletebutton = tk.Button(self.buttons, text="Delete", width= 12, command=self._on_delete)
     self.deletebutton.pack(side=tk.RIGHT, padx=3, pady=2)
-    self.resetbutton = ttk.Button(self.buttons, text="Reset", width= 15, command=self._on_reset)
+    self.resetbutton = tk.Button(self.buttons, text="Reset", width= 12, command=self._on_reset)
     self.resetbutton.pack(side=tk.RIGHT, padx=3, pady=2)
-    self.modifybutton = ttk.Button(self.buttons, text="Modify", width= 15, command=self._on_modify)
+    self.modifybutton = tk.Button(self.buttons, text="Modify", width= 12, command=self._on_modify)
     self.modifybutton.pack(side=tk.RIGHT, padx=3, pady=2)
-    self.savebutton = ttk.Button(self.buttons, text="Save", width= 15, command=self._on_save)
+    self.savebutton = tk.Button(self.buttons, text="Save", width= 12, command=self._on_save)
     self.savebutton.pack(side=tk.RIGHT, padx=3, pady=2)
-    self.viewbutton = ttk.Button(self.buttons, text="View", width= 15, command=self._on_view)
+    self.viewbutton = tk.Button(self.buttons, text="View", width= 12, command=self._on_view)
     self.viewbutton.pack(side=tk.RIGHT, padx=3, pady=2)
 
     #entries
