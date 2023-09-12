@@ -4,14 +4,14 @@ import operator
 
 WORDS = ['this', 'is', 'an','elementary', 'test', 'example']
 
-"""The (1)[0][1] at the end looks a bit confusing. It means the following:
+"""The (1)[0][1]. It means the following:
 1 We only want the most commonly appearing letter, returned in a one-element
 list of tuples.
 2 We then want the first element from that list, a tuple.
 3 We then want the count for that most common element, at index 1 in the tuple.
 """
 def most_repeating_word(words):
-    return max(words,key=most_repeating_letter_count)
+    return max(words, key=most_repeating_letter_count)
 def most_repeating_letter_count(word):
     return Counter(word).most_common(1)[0][1]
 

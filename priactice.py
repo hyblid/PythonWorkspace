@@ -1,26 +1,9 @@
-import sqlite3
+peoples = [('Donald', 'Trump', 7.85),
+          ('Vladimir', 'Putin', 3.626),
+          ('Jinping', 'Xi', 10.603)]
 
-with sqlite3.connect("movie.db") as db:
-    cursor = db.cursor()
-    
-    cursor.execute("""CREATE TABLE IF NOT EXISTS MOVIES (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title text NOT NULL,
-        year text NOT NULL,
-        stars text NOT NULL);""")
-    
-    cursor.execute("""INSERT INTO movies (title, year, stars) 
-                 VALUES("terminaotr", "1955", "4")""")
-    db.commit()
-    
-    title = input("Enter TITLE: ")
-    year = input("Enter YEAR: ")
-    stars = input("Enter STARS  : ")
-    cursor.execute("""INSERT INTO movies (title, year, stars) VALUES(?,?,?)""", 
-                  (title, year, stars))
-    
-    db.commit()
-    
-    cursor.execute("SELECT * FROM MOVIES")
-    print(cursor.fetchall())
-                 
+def format_sort_record1(list_of_tuples):
+    template = "{1:10} {0:10} {2:5.2f}"
+    for person in peoples:
+        print("{1:10} {0:10} {2:5.2f}".format(*person))
+format_sort_record1(peoples)
