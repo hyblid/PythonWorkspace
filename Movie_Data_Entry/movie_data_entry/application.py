@@ -25,14 +25,15 @@ class Application(tk.Tk):
         self.model = m.Movie()
         self.title("Movie Data Entry Application")
         self.columnconfigure(0, weight=1)
-        self.geometry("650x300")
+        self.geometry("650x350")
         self.config(padx=5, pady=5, bg=PINK)
         self.resizable(True, True)
         
         # style = ttk.Style()
         # style.theme_use('clam')
 
-        ttk.Label(self, text="Movie Data Entry Application", font=("TkDefaultFont", 16), background=PINK).grid(row=0)
+        ttk.Label(self, text="Movie Data Entry Application", 
+                  font=("TkDefaultFont", 16), background=PINK).grid(row=0)
 
         self.recordform = v.DataRecordForm(self, self.model)
         self.recordform.grid(row=1, padx=10, sticky=(tk.W + tk.E))
@@ -59,31 +60,24 @@ class Application(tk.Tk):
                 title text NOT NULL,
                  year text NOT NULL,
                  stars text NOT NULL);""")
-        return db
+        return db, cursor
     
     def _on_save(self, *_):
-        #creat record file
-        with sqlite3.connect(self.DB_NAME) as db:
-            cursor = db.cursor()
-    
-            cursor.execute("""CREATE TABLE IF NOT EXISTS MOVIES (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                title text NOT NULL,
-                 year text NOT NULL,
-                 stars text NOT NULL);""")
+        #creat or add record
+        db, cursor = self.connect_db()
   
-            title = self.recordform.txt_title.get()
-            year = self.recordform.txt_year.get()
-            stars = self.recordform.txt_stars.get()
-                
-            cursor.execute("""INSERT INTO movies (title, year, stars) VALUES(?,?,?)""", 
+        title = self.recordform.txt_title.get()
+        year = self.recordform.txt_year.get()
+        stars = self.recordform.txt_stars.get()
+              
+        cursor.execute("""INSERT INTO movies (title, year, stars) VALUES(?,?,?)""", 
                     (title, year, stars))
-            db.commit()
+        db.commit()
             
             # self.recordform.reset_entry() 
-            self._on_reset()
-            cursor.execute("SELECT * FROM MOVIES")
-            print("Record was saved", cursor.fetchall())  
+        self._on_reset()
+        cursor.execute("SELECT * FROM MOVIES")
+        print("Record was saved", cursor.fetchall())  
 
     def _on_view(self, *_):
         #clear before clicked view
@@ -108,16 +102,45 @@ class Application(tk.Tk):
                     self.recordform.tree.insert('', 'end', text="item",
                             values=(movie[0], movie[1], movie[2], movie[3]))
             print("Treeview was displayed!",cursor.fetchall())
+            self.recordform.status_label.config(text="Treeview was displayed!")
+            self.recordform.tree.bind("<Double-1>", self.OnDoubleClick)
             
-        
+    def OnDoubleClick(self, event):
+        current_item = self.recordform.tree.item(self.recordform.tree.focus())
+        detail_item = list(current_item.get("values"))
+        print("You clicked printed title:{0} year:{1} stars:{2}"
+            .format(detail_item[1], detail_item[2], detail_item[3]))
+        # insert values to Entries
+        self.recordform.txt_title.insert(tk.END, detail_item[1])
+        self.recordform.txt_year.insert(tk.END, detail_item[2])
+        self.recordform.txt_stars.insert(tk.END, detail_item[3])
+        # fix title is disable for modifying record
+        self.recordform.txt_title.config(state="disabled")        
+         
     def _on_modify(self, *_):
-        pass    
+        title = self.recordform.txt_title.get()
+        year = self.recordform.txt_year.get()
+        stars =  self.recordform.txt_stars.get()        
+        db, cursor = self.connect_db()
+        cursor.execute("""UPDATE movies SET year=?, stars=? WHERE title=?"""
+                       , (year, stars, title)) 
+        db.commit()
+        print(f"year:{year} and stars:{stars} was update for title:{title}")    
+         
     def _on_reset(self, *_):
         self.recordform.tree.delete(*self.recordform.tree.get_children())
         self.recordform.txt_title.delete(0, tk.END)  
         self.recordform.txt_year.delete(0, tk.END)  
         self.recordform.txt_stars.delete(0, tk.END)  
         self.recordform.update()   
+        
     def _on_delete(self, *_):
-        pass    
+        title = self.recordform.txt_title.get() 
+        if not title:
+            db, cursor = self.connect_db()   
+            cursor.execute("""DELETE FROM movies WHERE title=?""", (title,)) 
+            # cursor.execute("""DELETE FROM movies WHERE title='Xman'""") 
+            db.commit()
+            print(f"title:{title} was deleted!")
+            self._on_view()  
     

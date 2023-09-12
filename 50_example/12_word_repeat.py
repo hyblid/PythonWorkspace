@@ -25,7 +25,7 @@ def most_repeating_vowel_count(word):
     #return integer
     return Counter(vowels_in_word).most_common(1)[0][1]
  
-#shells return dict and operator.temgetter(1) get value
+#shells return dict and operator.itemgetter(1) get value
 def shells_by_popularity(filename):
     shells = Counter(one_line.split(':')[-1].strip()
                      for one_line in open(filename)

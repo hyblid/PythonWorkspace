@@ -41,7 +41,7 @@ class DataRecordForm(tk.Frame):
     #buttons
     self.buttons = tk.LabelFrame(self, text="Operations")
     self.buttons.grid(sticky=tk.W + tk.E)
-    self.exitbutton = ttk.Button(self.buttons, text="Exit", width= 15,command=self.quit)
+    self.exitbutton = ttk.Button(self.buttons, text="Exit", width= 15, command=self.quit)
     self.exitbutton.pack(side=tk.RIGHT, padx=3, pady=2)
     self.deletebutton = ttk.Button(self.buttons, text="Delete", width= 15, command=self._on_delete)
     self.deletebutton.pack(side=tk.RIGHT, padx=3, pady=2)
@@ -53,7 +53,13 @@ class DataRecordForm(tk.Frame):
     self.savebutton.pack(side=tk.RIGHT, padx=3, pady=2)
     self.viewbutton = ttk.Button(self.buttons, text="View", width= 15, command=self._on_view)
     self.viewbutton.pack(side=tk.RIGHT, padx=3, pady=2)
-  
+
+    #entries
+    self.label_frame = tk.LabelFrame(self, text="Status Record", height= 200)
+    self.label_frame.grid(sticky=tk.W + tk.E)
+    self.status_label = tk.Label(self.label_frame, text= "Welcome Movie Record")
+    self.status_label.pack(side=tk.RIGHT)
+
   
     # in Application   self.recordform.bind('<<SaveRecord>>', self._on_save)
   def _on_delete(self):
