@@ -1,9 +1,34 @@
-peoples = [('Donald', 'Trump', 7.85),
-          ('Vladimir', 'Putin', 3.626),
-          ('Jinping', 'Xi', 10.603)]
+import tkinter as tk
+# from tkinter import ttk
+import ttkbootstrap as ttk
 
-def format_sort_record1(list_of_tuples):
-    template = "{1:10} {0:10} {2:5.2f}"
-    for person in peoples:
-        print("{1:10} {0:10} {2:5.2f}".format(*person))
-format_sort_record1(peoples)
+def convert():
+    mile_input= entry_Int.get()
+    km_output = mile_input *1.61
+    output_string.set(km_output)
+
+window = ttk.Window(themename="darkly")
+window.title("Demo")
+window.geometry("300x150")
+
+title_label1 = ttk.Label(master=window, text= "Miles to kilometers", font="Calibri 24 bold")
+title_label1.pack()
+
+input_frame = ttk.Frame(master=window)
+entry_Int = tk.IntVar()
+entry = ttk.Entry(master=input_frame, textvariable=entry_Int)
+button=ttk.Button(master=input_frame, text= "Convert", command=convert)
+entry.pack(side="left", padx=10)
+button.pack(side="left")
+input_frame.pack(pady=10)
+
+#output
+output_string =tk.StringVar()
+output_label = ttk.Label(
+    master=window, 
+    font ="Calibri 24", 
+    textvariable=output_string)
+output_label.pack(pady=5)
+
+
+window.mainloop()
