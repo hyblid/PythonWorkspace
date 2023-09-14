@@ -41,6 +41,10 @@ def partition_dict(d, f):
         else:
             output_false[key] = value
     return output_true, output_false   
+
+def f(k, v):
+    print(k,v)
+    return True
     
-print(dict_partition(d1, 1))
+print(partition_dict(d1, f))
 
