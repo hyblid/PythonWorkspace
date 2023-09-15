@@ -1,12 +1,8 @@
 ##
 # User Database
 # 
-# Note that this file is consulted directly only when the system is running
-# in single-user mode.  At other times this information is provided by
-# Open Directory.
-#
-# See the opendirectoryd(8) man page for additional information about
-# Open Directory.
+# index[0] : user id
+# index[2] : user number
 ##
 nobody:*:-2:-2::0:0:Unprivileged User:/var/empty:/usr/bin/false
 root:*:0:0::0:0:System Administrator:/var/root:/bin/sh
