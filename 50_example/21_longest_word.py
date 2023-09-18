@@ -20,7 +20,6 @@ def find_all_longest_words(dirname):
     
 def md5_files(dirname):
     output = {}
-
     for one_filename in glob.glob(f'{dirname}/*'):
         try:
             m = hashlib.md5()
@@ -32,7 +31,6 @@ def md5_files(dirname):
         
 def mod_times(dirname):
     output = {}
-
     for one_filename in glob.glob(f'{dirname}/*'):
         try:
             mod_time = os.stat(one_filename).ST_MTIME
