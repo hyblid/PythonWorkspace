@@ -28,7 +28,7 @@ class Application(tk.Tk):
         self.geometry("650x350")
         self.config(padx=5, pady=5)
         self.resizable(True, True)
-        self.iconbitmap("python.ico")
+        self.iconbitmap("tool_box.ico")
         
         # style = ttk.Style()
         # style.theme_use('clam')
