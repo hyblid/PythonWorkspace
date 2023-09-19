@@ -1,7 +1,5 @@
-c = { "United States": "Washingthon D.C",
-                   "Italy": "Rone",
-                   "England": "London"}
+answer = ("one","two", "three")
 
+answer += "happy"
 
-c["Korea"] = "Seoul"
-print(c)
+print(answer)

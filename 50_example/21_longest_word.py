@@ -35,7 +35,6 @@ def mod_times(dirname):
         try:
             mod_time = os.stat(one_filename).ST_MTIME
             output[one_filename] = (arrow.now() - arrow.get(1503636889)).days
-
         except:
             pass
     return output
