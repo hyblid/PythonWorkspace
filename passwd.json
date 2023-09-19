@@ -1,0 +1,686 @@
+[
+    {
+        "username": "nobody",
+        "password": "*",
+        "uid": "-2",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "root",
+        "password": "*",
+        "uid": "0",
+        "gid": "0",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "daemon",
+        "password": "*",
+        "uid": "1",
+        "gid": "1",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_uucp",
+        "password": "*",
+        "uid": "4",
+        "gid": "4",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_taskgated",
+        "password": "*",
+        "uid": "13",
+        "gid": "13",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_networkd",
+        "password": "*",
+        "uid": "24",
+        "gid": "24",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_installassistant",
+        "password": "*",
+        "uid": "25",
+        "gid": "25",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_lp",
+        "password": "*",
+        "uid": "26",
+        "gid": "26",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_postfix",
+        "password": "*",
+        "uid": "27",
+        "gid": "27",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_scsd",
+        "password": "*",
+        "uid": "31",
+        "gid": "31",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_ces",
+        "password": "*",
+        "uid": "32",
+        "gid": "32",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_mcxalr",
+        "password": "*",
+        "uid": "54",
+        "gid": "54",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_appleevents",
+        "password": "*",
+        "uid": "55",
+        "gid": "55",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_geod",
+        "password": "*",
+        "uid": "56",
+        "gid": "56",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_serialnumberd",
+        "password": "*",
+        "uid": "58",
+        "gid": "58",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_devdocs",
+        "password": "*",
+        "uid": "59",
+        "gid": "59",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_sandbox",
+        "password": "*",
+        "uid": "60",
+        "gid": "60",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_mdnsresponder",
+        "password": "*",
+        "uid": "65",
+        "gid": "65",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_ard",
+        "password": "*",
+        "uid": "67",
+        "gid": "67",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_www",
+        "password": "*",
+        "uid": "70",
+        "gid": "70",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_eppc",
+        "password": "*",
+        "uid": "71",
+        "gid": "71",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_cvs",
+        "password": "*",
+        "uid": "72",
+        "gid": "72",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_svn",
+        "password": "*",
+        "uid": "73",
+        "gid": "73",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_mysql",
+        "password": "*",
+        "uid": "74",
+        "gid": "74",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_sshd",
+        "password": "*",
+        "uid": "75",
+        "gid": "75",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_qtss",
+        "password": "*",
+        "uid": "76",
+        "gid": "76",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_cyrus",
+        "password": "*",
+        "uid": "77",
+        "gid": "6",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_mailman",
+        "password": "*",
+        "uid": "78",
+        "gid": "78",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_appserver",
+        "password": "*",
+        "uid": "79",
+        "gid": "79",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_clamav",
+        "password": "*",
+        "uid": "82",
+        "gid": "82",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_amavisd",
+        "password": "*",
+        "uid": "83",
+        "gid": "83",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_jabber",
+        "password": "*",
+        "uid": "84",
+        "gid": "84",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_appowner",
+        "password": "*",
+        "uid": "87",
+        "gid": "87",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_windowserver",
+        "password": "*",
+        "uid": "88",
+        "gid": "88",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_spotlight",
+        "password": "*",
+        "uid": "89",
+        "gid": "89",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_tokend",
+        "password": "*",
+        "uid": "91",
+        "gid": "91",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_securityagent",
+        "password": "*",
+        "uid": "92",
+        "gid": "92",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_calendar",
+        "password": "*",
+        "uid": "93",
+        "gid": "93",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_teamsserver",
+        "password": "*",
+        "uid": "94",
+        "gid": "94",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_update_sharing",
+        "password": "*",
+        "uid": "95",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_installer",
+        "password": "*",
+        "uid": "96",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_atsserver",
+        "password": "*",
+        "uid": "97",
+        "gid": "97",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_ftp",
+        "password": "*",
+        "uid": "98",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_unknown",
+        "password": "*",
+        "uid": "99",
+        "gid": "99",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_softwareupdate",
+        "password": "*",
+        "uid": "200",
+        "gid": "200",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_coreaudiod",
+        "password": "*",
+        "uid": "202",
+        "gid": "202",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_screensaver",
+        "password": "*",
+        "uid": "203",
+        "gid": "203",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_locationd",
+        "password": "*",
+        "uid": "205",
+        "gid": "205",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_trustevaluationagent",
+        "password": "*",
+        "uid": "208",
+        "gid": "208",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_timezone",
+        "password": "*",
+        "uid": "210",
+        "gid": "210",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_lda",
+        "password": "*",
+        "uid": "211",
+        "gid": "211",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_cvmsroot",
+        "password": "*",
+        "uid": "212",
+        "gid": "212",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_usbmuxd",
+        "password": "*",
+        "uid": "213",
+        "gid": "213",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_dovecot",
+        "password": "*",
+        "uid": "214",
+        "gid": "6",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_dpaudio",
+        "password": "*",
+        "uid": "215",
+        "gid": "215",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_postgres",
+        "password": "*",
+        "uid": "216",
+        "gid": "216",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_krbtgt",
+        "password": "*",
+        "uid": "217",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_kadmin_admin",
+        "password": "*",
+        "uid": "218",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_kadmin_changepw",
+        "password": "*",
+        "uid": "219",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_devicemgr",
+        "password": "*",
+        "uid": "220",
+        "gid": "220",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_webauthserver",
+        "password": "*",
+        "uid": "221",
+        "gid": "221",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_netbios",
+        "password": "*",
+        "uid": "222",
+        "gid": "222",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_warmd",
+        "password": "*",
+        "uid": "224",
+        "gid": "224",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_dovenull",
+        "password": "*",
+        "uid": "227",
+        "gid": "227",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_netstatistics",
+        "password": "*",
+        "uid": "228",
+        "gid": "228",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_avbdeviced",
+        "password": "*",
+        "uid": "229",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_krb_krbtgt",
+        "password": "*",
+        "uid": "230",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_krb_kadmin",
+        "password": "*",
+        "uid": "231",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_krb_changepw",
+        "password": "*",
+        "uid": "232",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_krb_kerberos",
+        "password": "*",
+        "uid": "233",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_krb_anonymous",
+        "password": "*",
+        "uid": "234",
+        "gid": "-2",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_assetcache",
+        "password": "*",
+        "uid": "235",
+        "gid": "235",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_coremediaiod",
+        "password": "*",
+        "uid": "236",
+        "gid": "236",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_xcsbuildagent",
+        "password": "*",
+        "uid": "237",
+        "gid": "237",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_xcscredserver",
+        "password": "*",
+        "uid": "238",
+        "gid": "238",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    },
+    {
+        "username": "_launchservicesd",
+        "password": "*",
+        "uid": "239",
+        "gid": "239",
+        "name": "",
+        "homedir": "0",
+        "shell": "0"
+    }
+]

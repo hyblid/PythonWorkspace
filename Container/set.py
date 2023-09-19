@@ -14,3 +14,4 @@ print("After pop()->", fruits)
 fruits.update({"chicken", "beef"})
 print("After update()->", fruits)
 #After update {'banana', 'orange', 'chicken', 'beef'}
+#just modify

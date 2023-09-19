@@ -39,5 +39,4 @@ def random_sum(csv_filename):
         num = [int(one_item) for one_item in one_line.split(",")]
         print(sum(num), statistics.mean(num))
         
-        
-random_sum("random.csv")
+passwd_to_csv("passwd.txt", "passwd.csv")
