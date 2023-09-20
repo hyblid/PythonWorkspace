@@ -3,16 +3,19 @@ The application/controller class for Movie Data Entry
 """
 
 import tkinter as tk
+import sqlite3
+import logging
 from tkinter import ttk
 from . import views as v
 from . import models as m
-import sqlite3
 
 
 PINK = "#FFE4C0"
 PINK = "#FFBBBB"
 BLUE = "#BFFFF0"
 GREEN = "#BFFFF0"
+logging.basicConfig(filename='log.txt', level=logging.INFO)
+#logging.info(e)
 
 class Application(tk.Tk):
     
