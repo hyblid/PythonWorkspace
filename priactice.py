@@ -1,32 +1,28 @@
+from random import choice, randint
 
-def provideAccess(user):
-    return {
-        "username": user,
-        "password": "admin"
-    }
- 
- 
-def runMatch():
-    user = str(input("Write your username -: "))
- 
-    # match statement starts here .
-    match user:
-        case "one":
-            print("Om do not have access  to the database \
-            only for the api code.")
-        case "two":
-            print(
-                "Vishal do not have access to the database , \
-                only for the frontend code.")
- 
-        case "three":
-            print("Rishabh have the access to the database")
-            print(provideAccess("Rishabh"))
- 
-        case _:
-            print("You do not have any access to the code")
- 
- 
-if __name__ == "__main__":
-    for _ in range(3):
-        runMatch()
+colors = ['red', 'green', 'blue', 'silver', 'white', 'black']
+vehicles = ['car', 'truck', 'semi', 'motorcycle', None]
+
+
+def biker_gang():
+    for _ in range(randint(2, 10)):
+        color = choice(colors)
+        yield f"{color} motorcycle"
+
+
+def traffic():
+    while True:
+        if randint(1, 50) == 50:
+            yield from biker_gang()
+            continue
+
+        vehicle = choice(vehicles)
+        color = choice(colors)
+        yield f"{color} {vehicle}"
+
+
+count = 0
+for count, vehicle in enumerate(traffic()):
+    print(f"{vehicle}")
+    if count == 100:
+        break
