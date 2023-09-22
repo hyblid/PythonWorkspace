@@ -1,7 +1,3 @@
-def foo(x):
-    def bar(y):
-        return x * y
-    return bar
+import sys
 
-f = foo(10)
-print(f(20))
+print(sys.byteorder)
