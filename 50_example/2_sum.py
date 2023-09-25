@@ -6,7 +6,7 @@ def sum1(*number):
     return sum
 
 def sum2(number, start_value=0):
-    return sum( number , index)
+    return sum( number , start_value)
 
 def sum3(numbers):
     return sum(numbers) / len(numbers)

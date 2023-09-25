@@ -17,6 +17,7 @@ def most_repeating_letter_count(word):
 
 def most_repeating_word2(words):
     return max(words, key=most_repeating_vowel_count)
+
 def most_repeating_vowel_count(word):
     vowels_in_word = ''
     for one_character in word.lower():

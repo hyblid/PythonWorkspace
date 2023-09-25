@@ -44,4 +44,4 @@ def pig_latin4(word):
 
     return f'{word[1:]}{word[0]}ay' 
             
-print(pig_latin4("wine")            )
+print(pig_latin4("wine"))
