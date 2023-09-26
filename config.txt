@@ -1,0 +1,4 @@
+fname=howad
+lname=hwang
+age=55
+sex=male
