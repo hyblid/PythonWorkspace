@@ -2,6 +2,7 @@ import struct
 from .book import Book
 
 class Bookshelf:
+    #Bigend, short
     fileinfo = struct.Struct('>h')
     version = 1
 
