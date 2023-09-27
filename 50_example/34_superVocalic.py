@@ -16,8 +16,6 @@ def word_lengths(filename):
     
 def letters_in_names():
     list_of_names = ["howard", "jennifer", "james", "junny"]
-    return { one_letter
-             for one_letter in ''.join(list_of_names)
-             if one_letter in string.ascii_letters }
+    return { one_letter for one_letter in ''.join(list_of_names) if one_letter in string.ascii_letters }
     
 print(letters_in_names())
