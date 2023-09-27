@@ -11,7 +11,7 @@ def flatten_odd_ints(mylist):
 
 def grandchildren_names1(d1):
     return [one_grandchild
-            for grandchild_list in d.values()
+            for grandchild_list in d1.values()
             for one_grandchild in grandchild_list]
     
 def sorted_grandchildren(d):
