@@ -41,3 +41,25 @@ mydict = {'george':16,'amber':19}
 res = dict((v,k) for k,v in mydict.items())
 print(res) # Prints george
 
+#nested dictionary
+nest_dict = [
+    {"name": "howard", "age": 34},
+    {"name": "jeniffer", "age": 14},
+    {"name": "james", "age": 20},
+]
+
+nest_dict1 = {
+   1: {"name": "howard1", "age": 100},
+   2: {"name": "jeniffer1", "age": 140},
+   3: {"name": "james1", "age": 200},
+}
+
+people = {1: {'name': 'John', 'age': '27', 'sex': 'Male'},
+          2: {'name': 'Marie', 'age': '22', 'sex': 'Female'}}
+
+for d in nest_dict:
+    for key, value in d.items():
+        print(key,value, end="\n")
+
+for key in nest_dict1.keys():
+        print(nest_dict1[key]["name"], nest_dict1[key]["age"])
