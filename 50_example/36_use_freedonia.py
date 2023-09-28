@@ -7,6 +7,7 @@ from freedonia import tax_brackets
 from freedonia import analyze_string
 from freedonia import from_keys
 
+
 brackets = [{'start': 0, 'end': 1000, 'tax': 0},
             {'start': 1000, 'end': 10000, 'tax': .1},
             {'start': 10000, 'end': 20000, 'tax': .2},
