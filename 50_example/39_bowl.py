@@ -26,12 +26,7 @@ class Book():
 class Shelf:
     def __init__(self):
         self.books = []
-
-    def add_books(self, *args):
-        self.books += args
-        width = sum(book.width for book in self.books)
-        if width > 500:
-            raise Exception("Shelf is not enough")
+        self.width=500
 
     def add_books(self, *args):
         for new_book in args:
