@@ -34,7 +34,6 @@ class FlatList(list):
         except TypeError:
             list.append(self, new_value)
 
-
-
 f = FlatList()
-print(f.append([10,20,30]))
+f.append([10,20,30])
+print(f)

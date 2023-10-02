@@ -58,11 +58,9 @@ class Phone:
     def dial(self, number):
         return f'Dialing {number}'
 
-
 class SmartPhone(Phone):
     def run_app(self, app_name):
         return f'Running an app: {app_name}'
-
 
 class iPhone(SmartPhone):
     def run_app(self, app_name):
@@ -110,6 +108,5 @@ class RyeBread(Bread):
         self.sugar = 1
         self.fat = 0.8
     
-
 r = RyeBread()
 print(r.get_nutrition(10))
