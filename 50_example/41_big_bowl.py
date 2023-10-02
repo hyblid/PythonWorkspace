@@ -19,6 +19,17 @@ class Bowl():
 class BigBowl(Bowl):
     max_scoops = 5
     
+# s1 = Scoop('chocolate')
+# s2 = Scoop('vanilla')
+# s3 = Scoop('persimmon')
+# s4 = Scoop('flavor 4')
+# s5 = Scoop('flavor 5')
+# bb = BigBowl()
+# bb.add_scoops(s1, s2)
+# bb.add_scoops(s3)
+# bb.add_scoops(s4, s5)
+# print(bb)    
+    
 class NotEnoughPostageError(Exception):
     pass
 
