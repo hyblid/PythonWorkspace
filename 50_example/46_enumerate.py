@@ -1,5 +1,5 @@
 class MyEnumerate():
-    # def __init__(self):
+    # def __init__(self, start=0):
         # self.data = data
         # self.start = start
 
