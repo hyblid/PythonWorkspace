@@ -1,43 +1,51 @@
+#!/usr/bin/env python3
+
+"""Solution to chapter 9, exercise 44, beyond 3: animal_safety"""
+
+
 class Animal():
-    def __init__(self, number_of_legs):
+    def __init__(self, color, number_of_legs):
         self.species = self.__class__.__name__
+        self.color = color
         self.number_of_legs = number_of_legs
 
     def __repr__(self):
-        return f'{self.species}, {self.number_of_legs} legs'
+        return f'{self.color} {self.species}, {self.number_of_legs} legs'
+
 
 class Wolf(Animal):
-    space_required = 10
-    def __init__(self):
-        super().__init__(4)
+
+    def __init__(self, color):
+        super().__init__(color, 4)
+
 
 class Sheep(Animal):
-    space_required = 5
-    def __init__(self):
-        super().__init__(4)
+
+    def __init__(self, color):
+        super().__init__(color, 4)
+
 
 class Snake(Animal):
-    space_required = 2
-    def __init__(self):
-        super().__init__(0)
+
+    def __init__(self, color):
+        super().__init__(color, 0)
 
 
 class Parrot(Animal):
-    space_required = 1
-    def __init__(self):
-        super().__init__(2)
 
+    def __init__(self, color):
+        super().__init__(color, 2)
 
-class NotEnoughSpaceError(Exception):
-    pass
-
-class DangerousAssignmentError(Exception):
-    pass
 
 animal_safety = {Wolf: [Wolf, Snake, Parrot],
                  Sheep: [Sheep, Snake, Parrot],
                  Snake: [Wolf, Sheep],
                  Parrot: [Wolf, Sheep]}
+
+
+class DangerousAssignmentError(Exception):
+    pass
+
 
 class Cage():
 
@@ -58,15 +66,15 @@ class Cage():
         output += '\n'.join('\t' + str(animal)
                             for animal in self.animals)
         return output
-
-class BigCage(Cage):
-    max_animals = 5
         
-wolf = Wolf()
-sheep = Sheep()
-snake = Snake()
-parrot = Parrot()
+wolf = Wolf("white")
+sheep = Sheep("blue")
+snake = Snake("black")
+parrot = Parrot("white")
 c1 = Cage(1)
-c1.add_animals(parrot, snake)
+c1.add_animals(parrot, sheep)
+c2 = Cage(2)
+c2.add_animals(parrot, sheep)
 print(c1)
+print(c2)
 
