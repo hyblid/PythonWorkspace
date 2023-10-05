@@ -3,7 +3,7 @@ import re
 import glob
 
 
-#path = "C:\\test\\PythonWorkspace\\Container")
+#path = "C:\\test\\PythonWorkspace\\Container"
 def all_lines(path):
     for filename in os.listdir(path): #listdir just return file name
         full_filename = os.path.join(path,filename)
