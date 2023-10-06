@@ -1,3 +1,1 @@
-arr1 = [[0]*3]*2
-print("h"*3)
-print(arr1)
+print([numbers for numbers in range(1000,3001)])
