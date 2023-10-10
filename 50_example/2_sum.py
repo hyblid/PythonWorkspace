@@ -29,5 +29,4 @@ def sum5(items):
 
 lst = ('1', '2', '3', '4', '5')
 print(sum5(lst))
-# print(sum5(lst))    
     

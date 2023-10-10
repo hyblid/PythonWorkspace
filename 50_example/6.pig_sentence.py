@@ -26,12 +26,10 @@ def pl_sentence2(filename="example.txt"):
 
     return "".join(output)
 
-    """
-    ['abc def ghi', 'jkl mno pqr', 'stu vwx yz']
-    """
 def pl_sentence3():
-    #["abc def ghi","jkl mno pqr","stu vwx yz"]
+    #output: ["abc jkl stu","def mno vwx","ghi pqr yz"]
     list_of_words = ['abc def ghi', 'jkl mno pqr', 'stu vwx yz']
+    #[('abc', 'jkl', 'stu'), ('def', 'mno', 'vwx'), ('ghi', 'pqr', 'yz')]
     return [' '.join(t)
             for t in (zip(*[s.split() for s in list_of_words]))]
     
