@@ -9,6 +9,7 @@ def mysum(*args):
         output += item
     return output
 # print(mysum(1,2,3,4,5,6,7,8,9,10))
+
 """only first argument become threshold and others *args
 """
 def mysum_bigger_than(threshold, *items):
@@ -19,7 +20,6 @@ def mysum_bigger_than(threshold, *items):
         if item > threshold:
             output += item
     return output
-
 # print(mysum_bigger_than(10, 5, 20, 30, 6))
 
 """ sum_numeric(10, 20, 'a', '30','bcd') --> arg"""
