@@ -31,7 +31,7 @@ def ubbi3(text, names):
 
     return output
 
-#"https://docs.python.org/3/library/stdtypes.html?#str translate to english from korean"
+#" \t\n\r\x0b\x0c" x0b:vertical tab, x0c:form feed
 def ubbi4(text):
     chars = string.whitespace
     output = []

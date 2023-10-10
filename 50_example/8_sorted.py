@@ -13,7 +13,7 @@ def strsort3(filename):
         for one_word in one_line.split(): # split each word
             if not one_word.isalpha(): # check word is alphabet
                 continue
-            if one_word > output:
+            if one_word > output: #get the lastest word
                 output = one_word
     return output 
 
@@ -23,7 +23,7 @@ def strsort4(filename):
         for one_word in one_line.split():
             if not one_word.isalpha():
                 continue
-            if len(one_word) > len(output):
+            if len(one_word) > len(output): #get the longest words
                 output = one_word
     return output 
 
