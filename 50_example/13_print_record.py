@@ -19,7 +19,7 @@ def format_sort_records(list_of_tuples):
     output = []
     template = '{last:10} {first:10} {distance:5.2f}'
     for person in sorted(list_of_tuples, key=operator.attrgetter('last', 'first')):
-        output.append(template.format(*(person._asdict())))
+        output.append(template.format(**(person._asdict())))
     return output
 
 #---------------------------------------------------------------------------------------#
@@ -61,4 +61,4 @@ def sort_movies2():
     print(f'No such field {sort_by}')
 
 
-print(sort_movies2())
+print(sort_movies1())
