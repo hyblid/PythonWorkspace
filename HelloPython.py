@@ -1,28 +1,41 @@
-class Monster:
-     def __init__(self,health,energy):
-          self.health = health
-          self.energy = energy
-     
-     def update_energy(self,amount):
-          self.energy += amount
-     
-     def get_damage(self,amount):
-          self.energy -= amount
-
-#1. create a hero class with 2 parameters: damage, monster
-class Hero:
-     def __init__(self,damage,monster):
-          self.damage = damage
-          self.monster = monster
-#3. the hero class should have an attack method that calls the get_demage method
-# the amount of damage is hero.damage
-     def attack(self):
-          self.monster.get_damage(self.damage)
+from  datetime import datetime
+# class Generic:
+#      def __init__(self):
+#           self._x = 10
           
-monster = Monster(health =100, energy = 50)
-hero = Hero(damage =15, monster= monster)
+#      def getter(self):
+#           print("get x")
+#           return self._x
+     
+#      def setter(self, value):
+#           print("set x")
+#           self._x = value
+          
+#      def deleter(self):
+#           print("delete x")
+#           del self._x
+          
+#      x = property(getter,setter,deleter)
 
-print(monster.health)
-hero.attack()
-print(monster.health)          
-               
+class Generic:
+     def __init__(self):
+          self._x = 10
+     
+     @property     
+     def x(self):
+          print(datetime.now())
+          return self._x
+     @x.setter
+     def x(self, value):
+          print("set x")
+          self._z = value
+     
+     @x.deleter     
+     def x(self):
+          print("delete x")
+          del self._x
+
+generic = Generic()
+generic.x=4
+print(generic.x)
+del generic.x
