@@ -16,4 +16,7 @@ print(window.winfo_screenheight())
 # security event 
 window.bind('<Escape>', lambda event: window.quit())
 
+
+
+
 window.mainloop()
