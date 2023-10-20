@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+#App is master=window
 class App(tk.Tk):
     def __init__(self, title, size):
         #main setup
@@ -12,15 +13,15 @@ class App(tk.Tk):
         print(self.winfo_screenheight())
         self.bind('<Escape>', lambda event: self.quit())
         
-        #widgets
+        #widgets parameter is self == window
         self.menu = Menu(self)
         self.main = Main(self)
         #run                     
         self.mainloop()
 
 class Menu(ttk.Frame):
-    def __init__(self, parent):
-        super().__init__(parent)
+    def __init__(self, parent, *args, **kwargs):
+        super().__init__(parent, *args, **kwargs)
         self.create_menu_widgets()
         
     def create_menu_widgets(self):
@@ -59,16 +60,16 @@ class Menu(ttk.Frame):
         entry.place(relx = 0.5, rely = 0.95, relwidth = 0.9, anchor = 'center') 
 
 class Main(ttk.Frame):
-    def __init__(self,parent):
-        super().__init__(parent)
+    def __init__(self,parent, *args, **kwargs):
+        super().__init__(parent, *args, **kwargs)
         self.place(relx = 0.3, y = 0, relwidth = 0.7, relheight = 1)
         Entry(self, "Entry1", "Button 1", "green")  
         Entry(self, "Entry2", "Button 2", "blue")  
 
         
 class Entry(ttk.Frame):
-    def __init__(self, parent, label_text, button_text, label_background):
-        super().__init__(parent) 
+    def __init__(self, parent, label_text, button_text, label_background, *args, **kwargs):
+        super().__init__(parent, *args, **kwargs) 
         
         label = ttk.Label(self, text=label_text, background=label_background)
         button = ttk.Button(self, text= button_text)
