@@ -122,14 +122,64 @@ def to_roman_number(value):
     result = ""
     remainder = value
 
-    # absteigende Skiikortie
-    for i in sorted(int_topp_rom
-"""::::"""":::::""""
-            romaroman_digit_map[
-emainder = divmod(remainder, multiplier)
-            iiiiresult += roman_digit * timesh
-def index_text(str   fojjjjjr num in range(2, -1, -1):
-        print(stkr[num])
-        iii
-print(from_roman_number("VII"))
-print(from_roman_.ii
+    # absteigende Sortierung
+    for i in sorted(int_to_roman_digit_map.keys(), reverse=True):
+        if remainder > 0:
+            multiplier = i
+            roman_digit = int_to_roman_digit_map[i]
+
+            times, remainder = divmod(remainder, multiplier)
+            # times = remainder // multiplier
+            # reminader = remainder % multiplier
+            result += roman_digit * times
+
+    return result
+
+def index_text(str):
+    for num in range(2, -1, -1):
+        print(str[num])
+        
+# print(to_roman_number(15))
+"""Q2.8.a.Computation of a2 + b2 = c2
+Compute all combinations of the values a, b, and c 
+(each starting from 1 and less than 100) for which the following formula holds: """
+def combination1():
+    return [(a,b,c) for a in range(1,100) for b in range(1,100) for c in range(1,100) if pow(a,2) + pow(b,2) == pow(c,2)]
+# print(eq())
+
+"""Q2.8.b.Computation of a2 + b2 = c2 + d2
+Compute all combinations of the values a, b, c, and d 
+(each starting from 1 and less than 100) for which the following formula holds:"""            
+def combination2():
+    return [(a,b,c,d) for a in range(1,100) for b in range(1,100) for c in range(1,100) for d in range(1,100)
+                            if pow(a,2) + pow(b,2) == pow(c,2) + pow(d,2)]
+# print(combination2())
+
+"""Q2.9.Exercise 9: Armstrong Numbers
+This exercise deals with three-digit Armstrong numbers. 
+By definition, these are numbers for whose digits x, y, and z from 1 to 9 satisfy the following equation:
+x*100+y*10+z*1=x^3+y^3+z^3
+Write function calc_armstrong_numbers() to compute all Armstrong numbers for x, y, and z (each < 10)."""
+def calc_armstrong_numbers():
+    return [a*100+b*10+c for a in range(1,10) for b in range(1,10) for c in range(1,10) 
+            if a*100+b*10+c== pow(a,3)+ pow(b,3)+ pow(c,3)]
+# print(calc_armstrong_numbers())
+
+def calc_numbers(cubic_function):
+    results = []
+    for x in range(1, 10):
+        for y in range(1, 10):
+            for z in range(1, 10):
+                numeric_value = x * 100 + y * 10 + z
+                cubic_value = int(cubic_function(x, y, z))
+                if numeric_value == cubic_value:
+                    results.append(numeric_value)
+    return results
+def special1(x, y, z):
+    return int(pow(x, 3) + pow(y, 3) + pow(z, 3))
+# def special2(x, y, z):
+#     return int(pow(x, 1) + pow(y, 2) + pow(z, 3))
+# def special3(x, y, z):
+#     return int(pow(x, 3) + pow(y, 2) + pow(z, 1))
+print(calc_numbers(special1))     
+print(calc_numbers(lambda x,y,z: int(pow(x, 3) + pow(y, 3) + pow(z,3))))

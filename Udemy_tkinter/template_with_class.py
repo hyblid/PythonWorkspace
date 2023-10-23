@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-#App is master=window
+#App is window = tk.Tk()
 class App(tk.Tk):
     def __init__(self, title, size):
         #main setup
@@ -65,8 +65,7 @@ class Main(ttk.Frame):
         self.place(relx = 0.3, y = 0, relwidth = 0.7, relheight = 1)
         Entry(self, "Entry1", "Button 1", "green")  
         Entry(self, "Entry2", "Button 2", "blue")  
-
-        
+       
 class Entry(ttk.Frame):
     def __init__(self, parent, label_text, button_text, label_background, *args, **kwargs):
         super().__init__(parent, *args, **kwargs) 
@@ -78,6 +77,5 @@ class Entry(ttk.Frame):
         button.pack(expand=True, fill="both", pady=10)
 
         self.pack(side="left", expand=True, fill="both", padx=20, pady=20)     
-            
-        
+
 App("Class based app,", (600,600))

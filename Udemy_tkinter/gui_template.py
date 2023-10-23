@@ -1,8 +1,6 @@
-import tkinter as tk
-from tkinter import ttk
-# import ttkbootstrap as ttk
+import customtkinter as ctk
 
-window = tk.Tk()
+window = ctk.CTk()
 window.title("Demo")
 window.geometry("600x400")
 
@@ -15,7 +13,8 @@ print(window.winfo_screenheight())
 
 # security event 
 window.bind('<Escape>', lambda event: window.quit())
-
+button = ctk.CTkButton(window, text="Button")
+button.pack()
 
 
 
