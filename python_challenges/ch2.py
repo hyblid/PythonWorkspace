@@ -181,5 +181,60 @@ def special1(x, y, z):
 #     return int(pow(x, 1) + pow(y, 2) + pow(z, 3))
 # def special3(x, y, z):
 #     return int(pow(x, 3) + pow(y, 2) + pow(z, 1))
-print(calc_numbers(special1))     
-print(calc_numbers(lambda x,y,z: int(pow(x, 3) + pow(y, 3) + pow(z,3))))
+# print(calc_numbers(special1))     
+# print(calc_numbers(lambda x,y,z: int(pow(x, 3) + pow(y, 3) + pow(z,3))))
+"""Q.2.2.10.Suppose you have a collection of coins or numbers of different values. 
+Write function calc_max_possible_change(values) that determines, for positive integers, 
+what amounts can be seamlessly generated with it starting from the value 1. 
+The maximum value should be returned as a result."""
+def calc_max_possible_change(values):
+    sorted_numbers = list(values)
+    sorted_numbers.sort()
+    max_possible_change = 0
+    for current_value in sorted_numbers:
+        if current_value > max_possible_change + 1:
+            break
+        max_possible_change += current_value
+    return max_possible_change
+
+# print(calc_max_possible_change([1, 1, 1, 1, 5, 10, 20, 50]))
+"""Q.2.2.11.Two numbers n1 and n2 are called friends (or related) 
+if the sum of their divisors is equal to the other number:
+sum(divisors(n1)) = n2
+sum(divisors(n2)) = n1
+Write function calc_friends(max_exclusive) to compute all friends numbers up to a passed maximum value."""
+def find_proper_divisors(value):
+    return [i for i in range(1, value // 2 + 1) if value % i == 0]
+
+def calc_friends(max_exclusive):
+    friends = {}
+
+    for i in range(2, max_exclusive):
+        divisors1 = find_proper_divisors(i)
+        sum_div1 = sum(divisors1)
+        divisors2 = find_proper_divisors(sum_div1)
+        sum_div2 = sum(divisors2)
+
+        if i == sum_div2 and sum_div1 != sum_div2:
+            friends[i] = sum_div1
+
+    return friends
+# print(calc_friends(1210))
+"""Q.2.2.12.Any natural number greater than 1 can be represented as a multiplication of primes. 
+Remember the fact that 2 is also a prime. 
+Write function calc_prime_factors(value) that returns a list of prime numbers 
+whose multiplication yields the desired number."""
+def is_prime(potentially_prime):
+    for i in range(2, potentially_prime // 2 + 1):
+        if potentially_prime % i == 0:
+            return False
+    return True
+
+def calc_prime_factors(value):
+    lst=[]
+    for i in range(2, value):
+        if is_prime(i) and value % i ==0:
+            lst.append(i)
+    return lst
+
+print(calc_prime_factors(14))
