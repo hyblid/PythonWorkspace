@@ -17,7 +17,7 @@ class App(ctk.CTk):
         
         # layout
         self.columnconfigure(0, weight=1)
-        self.rowconfigure((0,1,2,3), weight=1, unifor="a")
+        self.rowconfigure((0,1,2,3), weight=1, uniform="a")
         
         # data
         self.metric_bool = ctk.BooleanVar(value=True)
