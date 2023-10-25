@@ -1,3 +1,5 @@
-import functools
-def factorial(n):
-    return functools.reduce(lambda n_1, n: n_1 * n, range(1, n + 1))
+a = 3
+b = a
+
+print(a is b)
+print(a==b)
