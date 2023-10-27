@@ -159,7 +159,7 @@ def power_of_itr(value, exponent):
     return sum
 # print(power_of_itr(4,2))
 
-"""Q.3.9.Write function print_pascal(n) that prints Pascal’s triangle. For the value 5, the following output should be generated
+"""Q.3.2.9.Write function print_pascal(n) that prints Pascal’s triangle. For the value 5, the following output should be generated
 n!/(n-r)!r!"""
 def print_pascal(n):
     for i in range(1, n+1):
@@ -172,5 +172,62 @@ def print_pascal(n):
             # using Binomial Coefficient
             C = C * (i - k) // k
         print()
-        
-print_pascal(5)
+# print_pascal(5)
+"""Q.3.2.10.A palindrome is a word that reads the same from the front and the back. 
+You can extend this definition to the digits of a number. 
+Write recursive function is_number_palindrome(number) 
+but without converting the number into a string and then using string functionalities like [::-1]."""
+def is_number_palindrome_rec(number):
+    return __is_number_palindrome_rec_helper(number, 0, number)
+
+def __is_number_palindrome_rec_helper(original_number, current_value, remaining_value):
+    if current_value == original_number:
+        return True
+    if (remaining_value < 1):
+        return False
+    last_digit = remaining_value % 10
+    new_current = current_value * 10 + last_digit
+    new_remaining = remaining_value // 10
+    return __is_number_palindrome_rec_helper(original_number, new_current, new_remaining)
+
+def reverse(number,reverse=0):
+    while number > 0:
+        remainder = number % 10
+        number = number // 10
+        reverse = (reverse * 10) + remainder
+    return reverse
+
+# print(is_number_palindrome_rec(17))
+
+"""Q.3.2.11.Calculate all permutations of a sequence of letters given as a string; 
+this means all possible combinations of these letters. 
+Implement this calculation in function calc_permutations(text). Consider also the case of duplicate letters
+, but do not use the standard Python functionality from the itertools module."""
+def calc_permutations(input):
+    if len(input) < 1:
+        return {input}
+    combinations = set()
+    for i, new_first in enumerate(input):
+        permutations = calc_permutations(input[0:i] + input[i + 1:])
+        for perm in permutations:
+            combinations.add(new_first + perm)
+    return combinations
+# print(calc_permutations("AAC"))
+"""Q.3.2.12.Write function count_substrings (text, value_to_find) that counts all occurrences of the given 
+substring. Thereby, when a pattern is found, it should be consumed; 
+in other words, it should not be available for hits again. This is shown n the following table as the last case. 
+Implement the whole thing yourself without resorting to the standard count()."""
+def count_substrings (text, value_to_find):
+    return count_substrings_helper(text, value_to_find)
+
+def count_substrings_helper(text, value_to_find, count=0):
+    index = text.find(value_to_find)
+    if index == -1:
+        return count
+    else:
+        return count_substrings_helper(text[index + len(value_to_find):], value_to_find, count + 1)
+"""Q.3.2.13.In the introduction, I showed how to draw a simple shape of a ruler as well as 
+a stylized snowflake (see Figure 3-3) using recursion. 
+In this exercise, you want to imitate an English-style ruler. 
+This involves dividing an area of one inch into 1/2 and 1/4 and 1/8. 
+In doing so, the length of the strokes decreases by one each time."""
