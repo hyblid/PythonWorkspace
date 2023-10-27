@@ -93,14 +93,84 @@ def sum_rec(values):
 
 # print(sum_rec([1,2,3]))
 import sys
-"""Q.3.5 Write function min_rec(values) that uses recursion to find the minimum value of the passed list. 
+"""Q.3.6 Write function min_rec(values) that uses recursion to find the minimum value of the passed list. 
 For an empty list, the value sys.maxsize should be returned."""
-def min_helper(values, pos):
+def min_helper(values, pos, min_value):
     if pos >= len(values):
-        return sys.maxsize
-    return values[pos] if values[pos] < min_helper(values, pos+1) else min_helper(values, pos+1)
+        return min_value
+    value = values[pos]
+    if value < min_value:
+        min_value = value
+    return min_helper(values, pos + 1, min_value)
 
 def min_rec(values):
-    return min_helper(values, 0)
+    return min_helper(values, 0, sys.maxsize)
+# print(min_rec([1, 2, 3, -7]))
+
+"""Q.3.7.a.Write function to_binary(n) that recursively converts the given positive integer into 
+a textual binary representation. No call to int(x, base) may be used."""
+def to_binary(n):
+    if n == 1:
+        return str(n)
+    remainder, last_digit = divmod(n, 2)
+    return to_binary(remainder)  + str(last_digit)
+# print(to_binary(7))
+
+"""Q.3.7.b.Write conversions to octal and hexadecimal numbers by implementing 
+the corresponding functions to_octal(n) and to_hex(n). Again, no call to int(x, base) may be used."""
+def to_octal(n):
+    if n < 8:
+        return str(n)
+    remainder, last_digit = divmod(n, 8)
+    return to_octal(remainder)  + str(last_digit)
+# print(to_octal(100))
+
+def to_hex(n):
+    if n == 0:
+        return ""
+    remainder, last_digit = divmod(n, 16)
+    if 9 < last_digit <= 15: 
+        last_digit =  chr(ord('A') + (last_digit - 10))
+    return to_hex(remainder)  + str(last_digit)
+# print(to_hex(15))
+"""Q.3.8.a.Write recursive function is_power_of_2(n) that evaluates the given positive integer to see if it is a power of two."""
+def is_power_of_2(n):
+    if n <= 1:
+        return True
+    remainder, last_digit = divmod(n, 2)
+    return  is_power_of_2(remainder) and last_digit == 0
+# print(is_power_of_2(16))
+        
+"""Q.3.8.b. Write recursive function power_of(value, exponent) that exponentiates the given positive integer with the positive number 
+specified as second parameter. For example, the call power_of(4, 2) should return the square of 4, so compute 42 = 16. You may not use the built-in functionality pow() or the operator **"""
+def power_of_rec(value, exponent):
+    if exponent == 0:
+        return 1
+    else:
+        return power_of_rec(value, exponent - 1) * value
+# print(power_of_rec(4,2))
     
-print(min_rec([1, 2, 3, -7]))
+"""Q.3.8.c. Write iterative function power_of(value, exponent) that exponentiates the given positive integer with the positive number 
+specified as second parameter. For example, the call power_of(4, 2) should return the square of 4, so compute 42 = 16. You may not use the built-in functionality pow() or the operator **"""
+def power_of_itr(value, exponent):
+    sum = 1
+    for _ in range(0, exponent):
+        sum = sum * value
+    return sum
+# print(power_of_itr(4,2))
+
+"""Q.3.9.Write function print_pascal(n) that prints Pascal’s triangle. For the value 5, the following output should be generated
+n!/(n-r)!r!"""
+def print_pascal(n):
+    for i in range(1, n+1):
+        C = 1
+        for k in range(1, i+1):
+    
+            # first value in a line is always 1
+            print(' ', C, sep='', end='')
+    
+            # using Binomial Coefficient
+            C = C * (i - k) // k
+        print()
+        
+print_pascal(5)
