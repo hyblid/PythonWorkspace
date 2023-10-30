@@ -231,3 +231,17 @@ a stylized snowflake (see Figure 3-3) using recursion.
 In this exercise, you want to imitate an English-style ruler. 
 This involves dividing an area of one inch into 1/2 and 1/4 and 1/8. 
 In doing so, the length of the strokes decreases by one each time."""
+def draw_interval(center_length):
+    if center_length > 0:
+        draw_interval(center_length - 1)
+        draw_line(center_length, "")
+        draw_interval(center_length - 1)
+
+def draw_line(count, label):
+    print(("-" * count) + " " + str(label))
+
+def draw_ruler(major_tick_count, max_length):
+    draw_line(max_length, "0")
+    for i in range(1, major_tick_count + 1):
+        draw_interval(max_length - 1)
+        draw_line(max_length, i)
