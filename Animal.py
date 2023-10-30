@@ -1,4 +1,4 @@
-class Animal:
+pclass Animal:
     def __init__(self, name, lifetime):
         self.name = name
         self.lifetime = lifetime
