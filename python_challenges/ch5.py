@@ -282,5 +282,123 @@ def sort_dict_by_value(dict):
                 make_list[i] =make_list[j]
                 make_list[j] = temp
     return make_list[-1] 
+# value_count([1, 1, 1, 2, 2, 2, 3, 3, 3])
+
+"""Q.5.2.11.a.Consider two decimal numbers that are to be added. Sounds simple, 
+but for this assignment, the numbers are interestingly represented as a list of digits. 
+Write function list_add(values1, values2). Also, consider the special case where there is an overflow."""
+def list_add(value1, value2):
+    result = []
+    carry = 0
+    for index in range(len(value1)-1, -1, -1):
+           sum = value1[index]+ value2[index] + carry
+           result.insert(0, sum%10)
+           carry = 1 if sum > 9 else 0
+    if carry == 1 :
+            result.insert(0,1)
+    return result
+# list_add([9,2,7],[1,3,5])
+
+"""Q.5.2.11.b.What changes if the digits are stored in reverse order in the list?"""
+def list_add_reverse(value1, value2):
+    result = []
+    carry = 0
+    value1 =reverse(value1)
+    value2=reverse(value2)
+    for index in range(0, len(value1), 1):
+           sum = value1[index]+ value2[index] + carry
+           result.append(sum%10)
+           carry = 1 if sum > 9 else 0
+    if carry == 1 :
+            result.append(carry)
+    print(result)
+# list_add_reverse([9,2,7],[1,3,5])
+
+"""Q.5.2.12.Given two lists of numbers, each sorted in ascending order, 
+merge them into a result list according to their order. Write function merge(values1, values2)."""
+def merge(values1, values2):
+    pos1 = 0
+    pos2 = 0
+    result = []
+    while pos1 < len(values1) and pos2 < len(values2):
+        value1 = values1[pos1]
+        value2 = values2[pos2]
+
+        if value1 < value2:
+            result.append(value1)
+            pos1 += 1
+        else:
+            result.append(value2)
+            pos2 += 1
+    add_remaining(result, values1, pos1)
+    add_remaining(result, values2, pos2)
+    return result
+
+def add_remaining(result, values, idx):
+    result += values[idx:]
+# print(merge([1, 4, 7, 12, 20], [10, 15, 17, 33]))
+"""Q.5.2.13.If you have worked a little with Excel, then you have probably used the Magic Selection. 
+It continuously populates a selected area with values based on the previous values. 
+This works for numbers, weekdays, or dates, for example. 
+To achieve something similar on your own, write function generate_following_values
+(current_value, sequence_length) that implements this for numbers. 
+Create a variation suitable for weekdays and with the following signature: 
+generate_following_values_for_- predefined(predefined_values, current_value, sequence_length)."""
+def generate_following_values(current_value, sequence_length):
+    result = []
+    while sequence_length >0:
+        result.append(current_value)
+        current_value += 1
+        sequence_length -= 1
+    return result
+
+weekdays = ["FRIDAY", "SATURDAY", "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"]
+def generate_following_values_for_predefined(predefined_values, current_value, sequence_length):
+    result = []
+    find_index = predefined_values.index(current_value)
+    result.append(predefined_values[find_index])
+    for index in range(find_index+1, find_index + sequence_length):
+        result.append(predefined_values[index])
+    return result
+
+# print(generate_following_values(1,7))
+# print(generate_following_values_for_predefined(weekdays, "FRIDAY", 8))
+
+"""Q.5.2.14.You learned about stack and queue data structures in the introduction and 
+implemented a queue based on a list. Then in exercise 2, 
+you implemented a stack itself. 
+Now you are asked to build a queue based on the stack data structure."""
+
+class Queue:
+    def __init__(self):
+        self.data = []
+        self.index = 0
+    def enqueue(self, value):
+        self.data.append(value)
+        self.index += 1
+    def dequeue(self):
+        value = self.data[0]
+        self.data.remove(value)
+        print(f"deque - {value}")
+        return value
+    def size(self):
+        return len(self.data)
+    def is_empty(self):
+        return len(self.data) == 0
+    def peek(self):
+        return self.data[0]
+    def __str__(self):
+        return "[" + ",".join(self.data) + "]"
     
-value_count([1, 2, 3, 4, 4, 4, 3, 3, 2, 4])
+    
+q = Queue()
+q.enqueue("one")    
+q.enqueue("two")    
+q.enqueue("three")
+q.dequeue()
+q.dequeue()
+q.enqueue("two")    
+q.enqueue("three")
+print(q.size())
+print(q.is_empty())
+print(q)    

@@ -1,5 +1,5 @@
 import random
-mylist = ["apple", "banana", "cherry"]
+mylist = [1, 2, 3]
 
-print(random.shuffle(mylist))
-print(mylist)
+for index, num in enumerate(mylist):
+    print(index, num)
