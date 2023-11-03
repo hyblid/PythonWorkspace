@@ -25,7 +25,7 @@ class Stack:
         self.data = []    
     #empty()
     def is_empty(self):
-        return len(self.data) == 0
+        return self.data == []
     #size()
     def size(self):
         return len(self.data)
@@ -372,19 +372,14 @@ Now you are asked to build a queue based on the stack data structure."""
 class Queue:
     def __init__(self):
         self.data = []
-        self.index = 0
     def enqueue(self, value):
-        self.data.append(value)
-        self.index += 1
+        self.data.insert(0,value)
     def dequeue(self):
-        value = self.data[0]
-        self.data.remove(value)
-        print(f"deque - {value}")
-        return value
+        return self.data.pop()
     def size(self):
         return len(self.data)
     def is_empty(self):
-        return len(self.data) == 0
+        return self.data == []
     def peek(self):
         return self.data[0]
     def __str__(self):
@@ -397,6 +392,7 @@ q.enqueue("two")
 q.enqueue("three")
 q.dequeue()
 q.dequeue()
+print(q)
 q.enqueue("two")    
 q.enqueue("three")
 print(q.size())
