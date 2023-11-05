@@ -139,21 +139,129 @@ def contains_rotation(str1, str2):
 # print(contains_rotation("ABCDEF","EFAB"))
 """Q.4.9.Write function check_braces(text) that checks whether the sequence 
 of round braces passed as a string contains matching (properly nested) pairs of braces."""
-def check_braces(text):
-    text_list = list(text.replace(" ", ""))
-    result = False
-    while len(text_list) > 0:
-        index = text_list.index(")")
-        if index != -1 and text_list[index-1] == "(":
-            text_list.pop(index)
-            text_list.pop(index-1)
-            result = True
-            print(text_list)
-        else: 
-            return False
+def check_braces(input):
+    opening_count = 0
+
+    for ch in input:
+        if ch == "(":
+            opening_count += 1
+        elif ch == ")":
+            opening_count -= 1
+            if opening_count < 0:
+                return False
+    return opening_count == 0
+
+# print(check_braces("(( )))((( ))"))
+"""Q.4.10.The term anagram is used to describe two strings that contain the same letters in the same frequency.
+Here, uppercase and lowercase should not make any difference. Write function is_anagram(str1, str2)."""
+def is_anagram(str1, str2):
+    char_counts1 = calc_char_frequencies(str1)
+    char_counts2 = calc_char_frequencies(str2)
+    return char_counts1 == char_counts2
+
+
+def calc_char_frequencies(input):
+    char_counts = {}
+    for current_char in input.upper():
+        if current_char in char_counts:
+            char_counts[current_char] += 1
+        else:
+            char_counts[current_char] = 1
+    return char_counts
+# print(is_anagram("Otto", "tota"))
+"""Q.4.11.Write function to_morse_code(text) that is capable of translating a given text into Morse code characters. They consist of sequences of one to four short and long tones per letter, symbolized by a dot (.) or a dash (-). It is desirable for easier distinguishability to place a space between each tone and three spaces between each sequence of letter tones. 
+Otherwise, S (...) and EEE (...) would not be distinguishable from each other"""
+morse = {"E":".","O":"---","S":"...","T":"-","W":".--"}
+def to_morse_code(text):
+    result = ""
+    for t in text:
+        result += morse[t]
+    return result
+# print(to_morse_code("TWEET"))
+"""Q.4.12.Write function matches_pattern(pattern, text) that examines a space-separated string (second parameter) 
+against the structure of a pattern passed in the form of individual characters as the first parameter."""
+"""Zip Sequence == Pattern"""
+def compare(val1, val2):
+    if val1 < val2:
+        return "<"
+    if val1 > val2:
+        return ">"
+    return "="
+
+
+def compare_versions(version1, version2):
+    v1_numbers = version1.split(".")
+    v2_numbers = version2.split(".")
+    pos = 0
+    compare_result = "="
+    while (pos < len(v1_numbers) and
+           pos < len(v2_numbers) and compare_result == "="):
+        current_v1 = int(v1_numbers[pos])
+        current_v2 = int(v2_numbers[pos])
+        compare_result = compare(current_v1, current_v2)
+        pos += 1
+    if compare_result == "=":
+       return compare(len(v1_numbers), len(v2_numbers))
+    return compare_result
+# print(compare_versions("3.3", "3.3"))
+"""Q.4.13.Convert a string into an integer. To do this, write function str_to_number(text) on your own."""
+def str_to_number(text):
+    is_octal = "0" in text.replace("+", "").replace("-","")[0]
+    try:
+        if is_octal:
+            return int(text, 8)
+        else:
+            return int(text)
+    except:
+        print("VauleError")   
+
+# print(str_to_number("0128"))    
+        
+"""Q.4.2.16.Write function print_tower(n) that represents a tower of n slices stacked on top of 
+each other as ASCII graphics,
+symbolized by the character #. Also, draw a lower boundary line."""
+# def print_tower(num):
+#     #top
+#     print(" "*num + "|" + " "*num)
+#     #middle
+#     space = num-1
+#     for n in range(1,num+1,1):
+#         print(" "*(space) + "#"*n + "|" + "#"*n)
+#         space-=1
+#     #bottom 
+#     print("_"*(2*num+1))
+# print_tower(6)
+
+"""Q.4.2.17.Write function print_box(width, height, fillchar) that draws a rectangle of the 
+specified size as an ASCII graphic and fills it with the passed-in fill character."""
+def print_box(width, height, fillchar):
+    for h in range(height):
+        for w in range(width):
+            #start "+"
+            if w == 0 and (h == 0 or h == height - 1):
+                print("+", end="")
+            #end "+"" 
+            elif w == width - 1 and (h == 0 or h == height - 1):
+                print("+", end="")
+            elif h == 0 or h == height - 1:
+                print("-", end="")
+            elif w == 0 or w == width - 1:
+                print("|", end="")
+            else:
+                print(fillchar, end="")
+        print()
+# print_box(7,5,"$")
+"""Q.4.2.18.Write function translate_vowel(text, replacement) that replaces all vowels 
+in a given text with a character or string. This can be used for a little guessing quiz,
+for example, or to determine word similarities based on consonants only"""
+def translate_vowel(text, replacement):
+    vowels = ("a","i","e","o","u")
+    result = ""
+    for t in text:
+        if t in vowels:
+            result += replacement
+        else:
+            result += t
     return result
 
-# print(check_braces("(())"))
-# print(check_braces("( )( )"))
-print(check_braces("(( )))((( ))"))
-# print(check_braces("((( )"))
+print(translate_vowel("quiz", " "))

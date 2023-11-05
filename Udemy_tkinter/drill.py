@@ -1,87 +1,130 @@
-import customtkinter as ctk 
-from snake_settings import *
-from random import randint
-from sys import exit
+class LogicGate:
 
-class Game(ctk.CTk):
-	def __init__(self):
+    def __init__(self,n):
+        self.name = n
+        self.output = None
 
-		# setup
-		super().__init__()
-		self.title('Snake')
-		self.geometry(f'{WINDOW_SIZE[0]}x{WINDOW_SIZE[1]}')
+    def getLabel(self):
+        return self.name
 
-		# layout 
-		self.columnconfigure(list(range(FIELDS[0])), weight = 1, uniform = 'a')
-		self.rowconfigure(list(range(FIELDS[1])), weight = 1, uniform = 'a')
+    def getOutput(self):
+        self.output = self.performGateLogic()
+        return self.output
 
-		# snake 
-		self.snake = [START_POS, (START_POS[0] - 1,START_POS[1]), (START_POS[0] - 2,START_POS[1])] 
-		self.direction = DIRECTIONS['right']
-		self.bind('<Key>', self.get_input)
-		
-		# apple 
-		self.place_apple()
 
-		# draw logic
-		self.draw_frames = []
-		self.animate()
+class BinaryGate(LogicGate):
 
-		# run
-		self.mainloop()
+    def __init__(self,n):
+        super().__init__(n)
 
-	def animate(self):
-		# snake update
-		new_head = (self.snake[0][0] + self.direction[0], self.snake[0][1] + self.direction[1])
-		self.snake.insert(0, new_head)
-		
-		# apple collision
-		if self.snake[0] == self.apple_pos:
-			self.place_apple()
-		else:
-			self.snake.pop()
+        self.pinA = None
+        self.pinB = None
 
-		self.check_game_over()
+    def getPinA(self):
+        if self.pinA == None:
+            return int(input("Enter Pin A input for gate "+self.getLabel()+"-->"))
+        else:
+            return self.pinA.getFrom().getOutput()
 
-		# drawing 
-		self.draw()
-		self.after(250, self.animate)
+    def getPinB(self):
+        if self.pinB == None:
+            return int(input("Enter Pin B input for gate "+self.getLabel()+"-->"))
+        else:
+            return self.pinB.getFrom().getOutput()
 
-	def check_game_over(self):
-		snake_head = self.snake[0]
-		if snake_head[0] >= RIGHT_LIMIT or snake_head[1] >= BOTTOM_LIMIT or \
-		   snake_head[0] < LEFT_LIMIT or snake_head[1] < TOP_LIMIT or \
-		   snake_head in self.snake[1:]:
-			self.destroy()
-			exit()
+    def setNextPin(self,source):
+        if self.pinA == None:
+            self.pinA = source
+        else:
+            if self.pinB == None:
+                self.pinB = source
+            else:
+                print("Cannot Connect: NO EMPTY PINS on this gate")
 
-	def get_input(self, event):
-		match event.keycode:
-			case 37: self.direction = DIRECTIONS['left'] if self.direction != DIRECTIONS['right'] else self.direction
-			case 38: self.direction = DIRECTIONS['up'] if self.direction != DIRECTIONS['down'] else self.direction
-			case 39: self.direction = DIRECTIONS['right'] if self.direction != DIRECTIONS['left'] else self.direction
-			case 40: self.direction = DIRECTIONS['down'] if self.direction != DIRECTIONS['up'] else self.direction
 
-	def place_apple(self):
-		self.apple_pos = (randint(0, FIELDS[0] - 1), randint(0, FIELDS[1] - 1))
+class AndGate(BinaryGate):
 
-	def draw(self):
-		
-		# empty the window 
-		if self.draw_frames:
-			for frame, pos in self.draw_frames:
-				frame.grid_forget()
-			self.draw_frames.clear()
+    def __init__(self,n):
+        super().__init__(n)
 
-		apple_frame = ctk.CTkFrame(self, fg_color = APPLE_COLOR)
-		self.draw_frames.append((apple_frame, self.apple_pos))
+    def performGateLogic(self):
 
-		for index, pos in enumerate(self.snake):
-			color = SNAKE_BODY_COLOR if index != 0 else SNAKE_HEAD_COLOR
-			snake_frame = ctk.CTkFrame(self, fg_color = color, corner_radius = 0)
-			self.draw_frames.append((snake_frame, pos))
+        a = self.getPinA()
+        b = self.getPinB()
+        if a==1 and b==1:
+            return 1
+        else:
+            return 0
 
-		for frame, pos in self.draw_frames:
-			frame.grid(column = pos[0], row = pos[1])
+class OrGate(BinaryGate):
 
-Game()
+    def __init__(self,n):
+        super().__init__(n)
+
+    def performGateLogic(self):
+
+        a = self.getPinA()
+        b = self.getPinB()
+        if a ==1 or b==1:
+            return 1
+        else:
+            return 0
+
+class UnaryGate(LogicGate):
+
+    def __init__(self,n):
+        super().__init__(n)
+
+        self.pin = None
+
+    def getPin(self):
+        if self.pin == None:
+            return int(input("Enter Pin input for gate "+self.getLabel()+"-->"))
+        else:
+            return self.pin.getFrom().getOutput()
+
+    def setNextPin(self,source):
+        if self.pin == None:
+            self.pin = source
+        else:
+            print("Cannot Connect: NO EMPTY PINS on this gate")
+
+
+class NotGate(UnaryGate):
+
+    def __init__(self,n):
+        super().__init__(n)
+
+    def performGateLogic(self):
+        if self.getPin():
+            return 0
+        else:
+            return 1
+
+
+class Connector:
+
+    def __init__(self, fgate, tgate):
+        self.fromgate = fgate
+        self.togate = tgate
+
+        tgate.setNextPin(self)
+
+    def getFrom(self):
+        return self.fromgate
+
+    def getTo(self):
+        return self.togate
+
+
+def main():
+   g1 = AndGate("G1")
+   g2 = AndGate("G2")
+   g3 = OrGate("G3")
+   g4 = NotGate("G4")
+   c1 = Connector(g1,g3)
+   c2 = Connector(g2,g3)
+   c3 = Connector(g3,g4)
+   print(g4.getOutput())
+
+main()
