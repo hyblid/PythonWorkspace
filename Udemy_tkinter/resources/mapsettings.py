@@ -18,7 +18,7 @@ TEXT_COLOR = '#000'
 CLOSE_ITEM_COLOR = '#555'
 
 # image paths 
-map_image_path = 'C:\\test\\PythonWorkspace\\Udemy_tkinter\\resources\\map.png'
-paint_image_path = 'C:\\test\\PythonWorkspace\\Udemy_tkinter\\resources\\paint.png'
-terrain_image_path = 'C:\\test\\PythonWorkspace\\Udemy_tkinter\\resources\\terrain.png'
-icon_image_path = 'C:\\test\\PythonWorkspace\\Udemy_tkinter\\resources\\map.ico'
+map_image_path = 'D:\\test\\PythonWorkspace\\Udemy_tkinter\\resources\\map.png'
+paint_image_path = 'D:\\test\\PythonWorkspace\\Udemy_tkinter\\resources\\paint.png'
+terrain_image_path = 'D:\\test\\PythonWorkspace\\Udemy_tkinter\\resources\\terrain.png'
+icon_image_path = 'D:\\test\\PythonWorkspace\\Udemy_tkinter\\resources\\map.ico'
