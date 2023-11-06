@@ -1,3 +1,3 @@
-for (let i = 0; i < 5; i++) {
-  console.log('Hello world!');
-}
+import numpy as np
+
+number= [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
