@@ -95,7 +95,7 @@ def is_palidrome(value):
 # print(is_palidrome(["Tim", "Tom", "Mike", "Max"]))        
 # print(is_palidrome(["Max", "Mike", "Mike", "Max"]))        
 
-"""Q.5.2.4.In the introductory section, I showed how to rotate arrays. 
+"""Q.5.4a.In the introductory section, I showed how to rotate arrays. 
 Now try this inplace without creating a new array. 
 Your task is to rotate a two-dimensional, square-shaped array by 90 degrees clockwise. 
 Write generic function rotate_inplace(values2dim) that iteratively implements this."""
@@ -128,10 +128,10 @@ def rotate_inplace(values2dim):
             ru_y = height - offset
             lu_x = offset
             lu_y = height - offset - idx
-            lo = values2dim[lo_y][lo_x]
-            ro = values2dim[ro_y][ro_x]
-            ru = values2dim[ru_y][ru_x]
-            lu = values2dim[lu_y][lu_x]
+            lo = values2dim[lo_y][lo_x] #top left
+            ro = values2dim[ro_y][ro_x] #top right
+            ru = values2dim[ru_y][ru_x] #buttom left
+            lu = values2dim[lu_y][lu_x] #buttom right
             # copy over
             values2dim[ro_y][ro_x] = lo
             values2dim[ru_y][ru_x] = ro
@@ -139,6 +139,37 @@ def rotate_inplace(values2dim):
             values2dim[lo_y][lo_x] = lu
         offset += 1
     print_array(values)    
+# rotate_inplace(values)
 
-# print_array(values)
-rotate_inplace(values)
+"""Q.5.4b.Write recursive function rotate_inplace_recursive(values2dim) that 
+implements the desired 90-degree clockwise rotation."""
+def rotate_inplace_recursive(values2dim):
+    _ , max_x = get_dimension(values2dim)
+    rotate_inplace_recursive_helper(values2dim, 0, max_x - 1)
+
+
+def rotate_inplace_recursive_helper(values2dim, left, right):
+    if left >= right:
+        return
+    current_width = right - left
+    for i in range(current_width):
+        lo = values2dim[left + i][left]
+        ro = values2dim[right][left + i]
+        ru = values2dim[right - i][right]
+        lu = values2dim[left][right - i]
+        values2dim[left + i][left] = ro
+        values2dim[right][left + i] = ru
+        values2dim[right - i][right] = lu
+        values2dim[left][right - i] = lo
+        rotate_inplace_recursive_helper(values2dim, left + 1, right - 1)
+    print_array(values) 
+    
+"""Q.5.5.Initialize a two-dimensional rectangular array with random-based numbers representing 
+various types of diamonds or jewels as numerical values. 
+The constraint is that initially there must not be three diamonds of the same type placed horizontally 
+or vertically in direct sequence. Write function init_jewels_board(width, height, num_of_colors) to 
+generate a valid array of the given size and quantity of different types of diamonds."""   
+def init_jewels_board(width, height, num_of_colors):
+    #check holizontal
+    #check vertival
+    #check digonal
