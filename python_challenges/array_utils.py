@@ -76,3 +76,9 @@ def get_dimension(values2dim):
 
 def swap_with_tuple(values, first, second):
     values[second], values[first] = values[first], values[second]
+    
+def get_at(values, x, y):
+    max_y, max_x = get_dimension(values)
+    if x < 0 or y < 0 or y >= max_y or x >= max_x:
+        return -1
+    return values[y][x]

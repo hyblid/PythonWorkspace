@@ -1,6 +1,6 @@
 import numpy as np
 from enum import Enum, auto
-from array_utils import get_dimension, swap, print_array 
+from array_utils import get_dimension, swap, print_array, get_at 
 
 numbers= [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
 
@@ -168,8 +168,79 @@ def rotate_inplace_recursive_helper(values2dim, left, right):
 various types of diamonds or jewels as numerical values. 
 The constraint is that initially there must not be three diamonds of the same type placed horizontally 
 or vertically in direct sequence. Write function init_jewels_board(width, height, num_of_colors) to 
-generate a valid array of the given size and quantity of different types of diamonds."""   
+generate a valid array of the given size and quantity of different types of diamonds.
+2 3 3 4 4 3 2
+1 3 3 1 3 4 4
+4 1 4 3 3 1 3
+2 2 1 1 2 3 2
+3 2 4 4 3 3 4"""
+import random   
 def init_jewels_board(width, height, num_of_colors):
-    #check holizontal
-    #check vertival
-    #check digonal
+    board = []
+    for y in range(height):
+        board.append([])
+        for x in range(width):
+            board[y].append(0)
+
+    for y in range(height):
+        for x in range(width):
+            board[y][x] = select_valid_jewel(board, x, y, num_of_colors)
+
+    return board
+
+def select_valid_jewel(board, x, y, num_of_colors):
+    next_jewel_nr = -1
+    is_valid = False
+
+    while not is_valid:
+        next_jewel_nr = random.randint(1, num_of_colors)
+
+        is_valid = not check_horizontally(board, x, y, next_jewel_nr) and \
+                   not check_vertically(board, x, y, next_jewel_nr) and \
+                   not check_diagonally(board, x, y, next_jewel_nr)
+
+    return next_jewel_nr
+def check_vertically(board, x, y, jewel_nr):
+    left1 = get_at(board, x - 1, y)
+    left2 = get_at(board, x - 2, y)
+
+    return left1 == jewel_nr and left2 == jewel_nr
+
+
+def check_horizontally(board, x, y, jewel_nr):
+    top1 = get_at(board, x, y - 1)
+    top2 = get_at(board, x, y - 2)
+
+    return top1 == jewel_nr and top2 == jewel_nr
+
+
+# Bonus
+def check_diagonally(board, x, y, jewel_nr):
+    up_left1 = get_at(board, x - 1, y - 1)
+    up_left2 = get_at(board, x - 2, y - 2)
+
+    up_right1 = get_at(board, x + 1, y - 1)
+    up_right2 = get_at(board, x + 2, y - 2)
+
+    return up_left1 == jewel_nr and up_left2 == jewel_nr or \
+           up_right1 == jewel_nr and up_right2 == jewel_nr
+# init_jewels_board(7,5,4)    
+        
+"""Q.6.2.6.a Write function erase_chains(values2dim) that erases all rows of three or more contiguous diamonds in horizontal
+, vertical, and diagonal orientations from a rectangular playfield array."""  
+jewel = [[1,1,1,2,4,4,3],
+         [1,2,3,4,2,4,3],
+         [2,3,3,1,2,2,3]]
+
+def erase_chains(values2dim):
+    #check right
+    #check left
+    #check bottomtoright
+    #chekc uptoleft
+    width = len(values2dim[0])
+    height = len(values2dim)
+    for h in range(height):
+        for w in range(width):
+            print(h,w)
+            
+erase_chains(jewel)

@@ -9,5 +9,6 @@ class LogicGate:
     def getOutput(self):
         self.output = self.performGateLogic()
         return self.output
+
     
     
