@@ -37,8 +37,8 @@ def count_digits(value):
     print(value)
     if value < 10:
         return 1
-    else:
-        return  count_digits(value//10) + 1 
+    return count_digits(value // 10) + 1
+
 # print(count_digits(245))
 """Q.3.2b.Calculate the sum of the digits of a number recursively. 
 Write recursive function calc_sum_of_digits(value) for this purpose"""
@@ -64,14 +64,14 @@ def gcd_rec(a, b):
         return a
     else:
         return gcd_rec(b, a%b)
-# print(gcd(42,28))
+# print(gcd_rec(42,28))
 
 """Q.3.c.Write function lcm(a, b) that computes the least common multiplier (LCM) . 
 For two natural numbers a and b, you can calculate this based on the GCD using the following formula:
 lcm(a,b) = a*b / gcd(a,b)"""
 def lcm(a,b):
     return a * b / gcd_rec(a,b)
-# print(lcm(42,14))
+print(lcm(42,14))
 
 """Q.3.4.Write recursive function reverse_string (text) that flips the letters of the text passed in."""
 def reverse_string(input):
@@ -165,10 +165,8 @@ def print_pascal(n):
     for i in range(1, n+1):
         C = 1
         for k in range(1, i+1):
-    
             # first value in a line is always 1
             print(' ', C, sep='', end='')
-    
             # using Binomial Coefficient
             C = C * (i - k) // k
         print()
@@ -192,11 +190,9 @@ def __is_number_palindrome_rec_helper(original_number, current_value, remaining_
 
 def reverse(number,reverse=0):
     while number > 0:
-        remainder = number % 10
-        number = number // 10
+        number, remainder = divmod(number,10)
         reverse = (reverse * 10) + remainder
     return reverse
-
 # print(is_number_palindrome_rec(17))
 
 """Q.3.2.11.Calculate all permutations of a sequence of letters given as a string; 
@@ -212,7 +208,7 @@ def calc_permutations(input):
         for perm in permutations:
             combinations.add(new_first + perm)
     return combinations
-# print(calc_permutations("AAC"))
+print(calc_permutations("AAC"))
 """Q.3.2.12.Write function count_substrings (text, value_to_find) that counts all occurrences of the given 
 substring. Thereby, when a pattern is found, it should be consumed; 
 in other words, it should not be available for hits again. This is shown n the following table as the last case. 
