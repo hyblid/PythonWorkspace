@@ -1,18 +1,36 @@
-# from brank.hello import print_hello
-# import sys
-# sys.path.append(r"D:\test\PythonWorkspace")
-# from python_challenges.array_utils import print_array
+from pythonds.basic import Queue
+from print import Printer
 
-from ..python_challenges.array_utils import print_array
+import random
 
-values = [
-        ['1', '2', '3', '4', '5'],
-        ['J', 'K', 'L', 'M', 'N'],
-        ['I', 'V', 'W', 'X', 'O'],
-        ['H', 'U', 'Z', 'Y', 'P'],
-        ['G', 'T', 'S', 'R', 'Q'],
-        ['F', 'E', 'D', 'C', 'B']]
+def simulation(numSeconds, pagesPerMinute):
 
+    labprinter = Printer(pagesPerMinute)
+    printQueue = Queue()
+    waitingtimes = []
 
-board = [[0 for x in range(7)] for y in range(5)]
-print_array(board)
+    for currentSecond in range(numSeconds):
+
+      if newPrintTask():
+         task = Task(currentSecond)
+         printQueue.enqueue(task)
+
+      if (not labprinter.busy()) and (not printQueue.isEmpty()):
+        nexttask = printQueue.dequeue()
+        waitingtimes.append( nexttask.waitTime(currentSecond))
+        labprinter.startNext(nexttask)
+
+      labprinter.tick()
+
+    averageWait=sum(waitingtimes)/len(waitingtimes)
+    print("Average Wait {0:6.2f} secs {1:3d} tasks remaining.".format(averageWait,printQueue.size()))
+
+def newPrintTask():
+    num = random.randrange(1,181)
+    if num == 180:
+        return True
+    else:
+        return False
+
+for i in range(10):
+    simulation(3600,5)

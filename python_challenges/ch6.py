@@ -223,24 +223,65 @@ def check_diagonally(board, x, y, jewel_nr):
     up_right2 = get_at(board, x + 2, y - 2)
 
     return up_left1 == jewel_nr and up_left2 == jewel_nr or \
-           up_right1 == jewel_nr and up_right2 == jewel_nr
+            up_right1 == jewel_nr and up_right2 == jewel_nr
 # init_jewels_board(7,5,4)    
         
 """Q.6.2.6.a Write function erase_chains(values2dim) that erases all rows of three or more contiguous diamonds in horizontal
-, vertical, and diagonal orientations from a rectangular playfield array."""  
-jewel = [[1,1,1,2,4,4,3],
-         [1,2,3,4,2,4,3],
-         [2,3,3,1,2,2,3]]
+# , vertical, and diagonal orientations from a rectangular playfield array."""  
+# jewel = [
+#     [1,1,1,2,4,4,3],
+#     [1,2,3,4,2,4,3],
+#     [2,3,3,1,2,2,3]]
+
+jewel = [
+    [1,1,1,2,4,4,3],
+    [1,2,3,4,2,4,3],
+    [2,3,4,1,2,2,3]]
 
 def erase_chains(values2dim):
-    #check right
-    #check left
-    #check bottomtoright
-    #chekc uptoleft
-    width = len(values2dim[0])
-    height = len(values2dim)
-    for h in range(height):
-        for w in range(width):
-            print(h,w)
+    col = len(values2dim[0])
+    row = len(values2dim)
+    # for row in range(row):
+    #     for col in range(col):
+    #         checkRight(values2dim, row, col, values2dim[row][col])
+    #         checkBottom(values2dim, row, col, values2dim[row][col])
+    checkDiagonalForword(values2dim)
+    print_array(values2dim)
+            
+def checkRight(list,row, col, number):    
+    col = len(list[0])
+    row = len(list)
+    for row in range(row):
+        for col in range(col):
+            if col < len(list[0]) - 3:
+                if list[row][col] == list[row][col+1] == list[row][col+2] == number:
+                    list[row][col]="-"
+                    list[row][col+1]="-"
+                    list[row][col+2]="-" 
+                    
+def checkBottom(list, row, col, number):
+    len_col = len(list[0])
+    len_row = len(list)
+    for row in range(len_row):
+        for col in range(len_col):
+            if row+2 < len_row:
+                if list[row][col] == list[row+1][col] == list[row+2][col] == number and number!="-":
+                    list[row][col]="-"
+                    list[row+1][col]="-"
+                    list[row+2][col]="-"
+        if row + 3 != len(list):
+            break     
+    
+def checkDiagonalForword(list):
+    len_col = len(list[0])
+    len_row = len(list)
+    for row in range(len_row):
+        for col in range(len_col-1,len_col-5,-1):
+            if list[row][col] == list[row+1][col-1] == list[row+2][col-2] and list[row][col]!="-":
+                list[row][col]="-"
+                list[row+1][col-1]="-"
+                list[row+2][col-2]="-"
+        if row + 3 != len(list):
+            break   
             
 erase_chains(jewel)
