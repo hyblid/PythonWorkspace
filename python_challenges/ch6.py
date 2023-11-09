@@ -232,56 +232,140 @@ def check_diagonally(board, x, y, jewel_nr):
 #     [1,1,1,2,4,4,3],
 #     [1,2,3,4,2,4,3],
 #     [2,3,3,1,2,2,3]]
+from random import randrange
 
 jewel = [
-    [1,1,1,2,4,4,3],
-    [1,2,3,4,2,4,3],
-    [2,3,4,1,2,2,3]]
+    [1,2,3,3,3,4],
+    [1,3,2,4,2,4],
+    [1,2,4,2,4,4],
+    [1,2,3,5,5,5],
+    [1,2,1,3,4,4]]
 
-def erase_chains(values2dim):
-    col = len(values2dim[0])
-    row = len(values2dim)
-    # for row in range(row):
-    #     for col in range(col):
-    #         checkRight(values2dim, row, col, values2dim[row][col])
-    #         checkBottom(values2dim, row, col, values2dim[row][col])
-    checkDiagonalForword(values2dim)
-    print_array(values2dim)
+class Direction(Enum):
+    N = (0, -1)
+    NE = (1, -1)
+    E = (1, 0)
+    SE = (1, 1)
+    S = (0, 1)
+    SW = (-1, 1)
+    W = (-1, 0)
+    NW = (-1, -1)
+
+    def to_dx_dy(self):
+        return self.value
+
+    @classmethod
+    def provide_random_direction(cls):
+        random_index = randrange(len(list(Direction)))
+        return list(Direction)[random_index]
             
-def checkRight(list,row, col, number):    
-    col = len(list[0])
-    row = len(list)
-    for row in range(row):
-        for col in range(col):
-            if col < len(list[0]) - 3:
-                if list[row][col] == list[row][col+1] == list[row][col+2] == number:
-                    list[row][col]="-"
-                    list[row][col+1]="-"
-                    list[row][col+2]="-" 
-                    
-def checkBottom(list, row, col, number):
-    len_col = len(list[0])
-    len_row = len(list)
-    for row in range(len_row):
-        for col in range(len_col):
-            if row+2 < len_row:
-                if list[row][col] == list[row+1][col] == list[row+2][col] == number and number!="-":
-                    list[row][col]="-"
-                    list[row+1][col]="-"
-                    list[row+2][col]="-"
-        if row + 3 != len(list):
-            break     
-    
-def checkDiagonalForword(list):
-    len_col = len(list[0])
-    len_row = len(list)
-    for row in range(len_row):
-        for col in range(len_col-1,len_col-5,-1):
-            if list[row][col] == list[row+1][col-1] == list[row+2][col-2] and list[row][col]!="-":
-                list[row][col]="-"
-                list[row+1][col-1]="-"
-                list[row+2][col-2]="-"
-        if row + 3 != len(list):
-            break   
+def erase_chains(values2dim):
+    mark_elements_for_removal(values2dim)
+
+    return erase_all_marked(values2dim)
+
+
+def mark_elements_for_removal(values2dim):
+    max_y, max_x = get_dimension(values2dim)
+
+    for y in range(max_y):
+        for x in range(max_x):
+            dirs_with_chains = find_chains(values2dim, x, y)
+            mark_chains_for_removal(values2dim, x, y, dirs_with_chains)
+
+
+def erase_all_marked(values2dim):
+    max_y, max_x = get_dimension(values2dim)
+    erased_something = False
+    for y in range(max_y):
+        for x in range(max_x):
+            if is_element_marked_for_removal(values2dim[y][x]):
+                values2dim[y][x] = 0
+                erased_something = True
+    return erased_something
+
+
+def is_element_marked_for_removal(value):
+    return value < 0
+
+
+def find_chains(values2dim, start_x, start_y):
+    orig_value = values2dim[start_y][start_x]
+    if orig_value == 0:  #ATTENTION think about such special cases
+        return []
+
+    dirs_with_chains = []
+    relevant_dirs = (Direction.S, Direction.SW, Direction.E, Direction.SE)
+
+    for current_dir in relevant_dirs:
+        length = 1
+        dx, dy = current_dir.value
+        next_pos_x = start_x + dx
+        next_pos_y = start_y + dy
+
+        while is_on_board(values2dim, next_pos_x, next_pos_y) and \
+            is_same(orig_value, values2dim[next_pos_y][next_pos_x]):
+            length += 1
+            next_pos_x += dx
+            next_pos_y += dy
+
+            if length >= 3:
+                dirs_with_chains.append(current_dir)
+    return dirs_with_chains
+
+
+def is_on_board(values2dim, next_pos_x, next_pos_y):
+    max_y, max_x = get_dimension(values2dim)
+    return next_pos_x >= 0 and next_pos_y >= 0 and \
+        next_pos_x < max_x and next_pos_y < max_y
+
+
+def is_same(val1, val2):
+    return abs(val1) == abs(val2)
+
+
+def mark_chains_for_removal(values, start_x, start_y, dirs_with_chains):
+    orig_value = values[start_y][start_x]
+
+    for current_dir in dirs_with_chains:
+        dx, dy = current_dir.value
+        next_x = start_x
+        next_y = start_y
+
+        while (is_on_board(values, next_x, next_y) and \
+            is_same(orig_value, values[next_y][next_x])):
+            values[next_y][next_x] = mark_element_for_removal(orig_value)
+            next_x += dx
+            next_y += dy
+
+def mark_element_for_removal(value):
+    return -value if value > 0 else value
+
+def fall_down_first_try(values2dim):
+    max_y, max_x = get_dimension(values2dim)
+    for x in range(max_x):
+        for y in range(max_y - 1, 0, -1):
+            value = values2dim[y][x]
+            if is_blank(value):
+                # fall down
+                values2dim[y][x] = values2dim[y - 1][x]
+                values2dim[y - 1][x] = 0
+
+def is_blank(value):
+    return value == 0
+
+def fall_down(values2dim):
+    max_y, max_x = get_dimension(values2dim)
+
+    for x in range(max_x):
+        for y in range(max_y - 1, 0, -1):
+            current_y = y
+            #fall down until there is no more empty space underneath
+            while current_y < len(values2dim) and \
+                is_blank(values2dim[current_y][x]):
+                #fall down
+                values2dim[current_y][x] = values2dim[current_y - 1][x]
+                values2dim[current_y - 1][x] = 0
+                current_y += 1
             
 erase_chains(jewel)
