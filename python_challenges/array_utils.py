@@ -1,5 +1,11 @@
 import numpy as np
 
+def get_at(values, x, y):
+    max_y, max_x = get_dimension(values)
+    if x < 0 or y < 0 or y >= max_y or x >= max_x:
+        return -1
+    return values[y][x]
+
 def swap(values, first, second):
     value1 = values[first]
     value2 = values[second]
@@ -12,7 +18,7 @@ def find(values, search_for):
             return i
     return -1
 
-def find_with_enumerate(values, search_for):
+def find_index(values, search_for):
     for i, value in enumerate(values):
         if value == search_for:
             return i
@@ -77,8 +83,4 @@ def get_dimension(values2dim):
 def swap_with_tuple(values, first, second):
     values[second], values[first] = values[first], values[second]
     
-def get_at(values, x, y):
-    max_y, max_x = get_dimension(values)
-    if x < 0 or y < 0 or y >= max_y or x >= max_x:
-        return -1
-    return values[y][x]
+

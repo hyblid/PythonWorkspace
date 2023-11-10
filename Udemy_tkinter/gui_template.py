@@ -13,7 +13,7 @@ print(window.winfo_screenheight())
 
 # security event 
 window.bind('<Escape>', lambda event: window.quit())
-button = ctk.CTkButton(window, text="Button")
+button = ctk.CTkButton(window, text="Button", command=window.destroy)
 button.pack()
 
 

@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from draw_surface import DrawSurface
+from tool_panel import ToolPanel
 
 class App(ctk.CTk):
     def __init__(self):
@@ -11,12 +12,24 @@ class App(ctk.CTk):
         
         # data
         self.color_string = ctk.StringVar(value="000")
-        self.brush_float = ctk.DoubleVar(value=0.2) #0.2 -> 1
+        self.brush_float = ctk.DoubleVar(value=1) #0.2 -> 1
+        self.erase_bool = ctk.BooleanVar(value=False)
         
         #widgets
-        DrawSurface(self,self.color_string, self.brush_float)
+        DrawSurface(self,self.color_string, self.brush_float, self.erase_bool)
+        ToolPanel(self, self.brush_float, self.color_string)
         
+        #mousewheel event
+        self.bind("<MouseWheel>", self.adjust_brush_size)
         self.mainloop()
+        
+    def adjust_brush_size(self, event):
+        #1.get a direction
+        direction = int(event.delta / abs(event.delta))
+        new_brush_size = self.brush_float.get() + 0.05 * direction
+        #limit the brush size between 0.2 and 1
+        new_brush_size = max(0.2,min(1, new_brush_size))
+        self.brush_float.set(new_brush_size)
         
         
 if __name__ == "__main__":

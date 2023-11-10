@@ -196,8 +196,8 @@ def select_valid_jewel(board, x, y, num_of_colors):
         next_jewel_nr = random.randint(1, num_of_colors)
 
         is_valid = not check_horizontally(board, x, y, next_jewel_nr) and \
-                   not check_vertically(board, x, y, next_jewel_nr) and \
-                   not check_diagonally(board, x, y, next_jewel_nr)
+                not check_vertically(board, x, y, next_jewel_nr) and \
+                not check_diagonally(board, x, y, next_jewel_nr)
 
     return next_jewel_nr
 def check_vertically(board, x, y, jewel_nr):
@@ -261,18 +261,14 @@ class Direction(Enum):
             
 def erase_chains(values2dim):
     mark_elements_for_removal(values2dim)
-
     return erase_all_marked(values2dim)
-
 
 def mark_elements_for_removal(values2dim):
     max_y, max_x = get_dimension(values2dim)
-
     for y in range(max_y):
         for x in range(max_x):
             dirs_with_chains = find_chains(values2dim, x, y)
             mark_chains_for_removal(values2dim, x, y, dirs_with_chains)
-
 
 def erase_all_marked(values2dim):
     max_y, max_x = get_dimension(values2dim)
@@ -295,6 +291,7 @@ def find_chains(values2dim, start_x, start_y):
         return []
 
     dirs_with_chains = []
+    #E=(1, 0),SE=(1, 1),S=(0, 1),SW=(-1, 1)
     relevant_dirs = (Direction.S, Direction.SW, Direction.E, Direction.SE)
 
     for current_dir in relevant_dirs:
@@ -308,21 +305,16 @@ def find_chains(values2dim, start_x, start_y):
             length += 1
             next_pos_x += dx
             next_pos_y += dy
-
             if length >= 3:
                 dirs_with_chains.append(current_dir)
     return dirs_with_chains
 
-
 def is_on_board(values2dim, next_pos_x, next_pos_y):
     max_y, max_x = get_dimension(values2dim)
-    return next_pos_x >= 0 and next_pos_y >= 0 and \
-        next_pos_x < max_x and next_pos_y < max_y
-
+    return next_pos_x >= 0 and next_pos_y >= 0 and next_pos_x < max_x and next_pos_y < max_y
 
 def is_same(val1, val2):
     return abs(val1) == abs(val2)
-
 
 def mark_chains_for_removal(values, start_x, start_y, dirs_with_chains):
     orig_value = values[start_y][start_x]
@@ -368,4 +360,60 @@ def fall_down(values2dim):
                 values2dim[current_y - 1][x] = 0
                 current_y += 1
             
-erase_chains(jewel)
+# erase_chains(jewel)
+
+"""Q.6.2.7.Write generic method spiral_traversal(values2dim) that traverses a two-dimensional rectangular array (or a nested list) 
+in the form of a spiral and prepares it as a list. The start is in the upper left corner.
+First the outer layer is traversed and then the next inner layer."""
+numbers1 = [[1, 2, 3, 4],
+        [12, 13, 14, 5],
+        [11, 16, 15, 6],
+        [10, 9, 8, 7]]
+
+letterPairs = [["AB", "BC", "CD", "DE"], ["JK", "KL", "LM", "EF"], ["IJ", "HI", "GH", "FG"]]
+class Directions(Enum):
+    RIGHT = (0, 1)
+    DOWN = (1, 0)
+    LEFT = (0, -1)
+    UP = (-1, 0)
+
+def spiral_traversal(values2dim):
+    pos_x = 0
+    pos_y = 0
+    min_x = 0
+    min_y = 1
+    max_y, max_x = get_dimension(values2dim)
+    results = []
+
+    dir = Directions.RIGHT
+    for _ in range(max_x * max_y):
+        results.append(values2dim[pos_y][pos_x])
+        if dir == Directions.RIGHT:
+            if pos_x < max_x - 1:  pos_x += 1
+            else:
+                dir = Directions.DOWN
+                #for inner
+                max_x -= 1
+        if dir == Directions.DOWN:
+            if pos_y < max_y - 1: pos_y += 1
+            else:
+                dir = Directions.LEFT
+                #for inner
+                max_y -= 1
+        if dir == Directions.LEFT:
+            if pos_x > min_x: pos_x -= 1
+            else:
+                dir = Directions.UP
+                #for inner
+                min_x += 1
+        if dir == Directions.UP:
+            if pos_y > min_y: pos_y -= 1
+            else:
+                dir = Directions.RIGHT
+                #for inner
+                min_y += 1
+                pos_x += 1
+    print(results)
+    return results
+spiral_traversal(numbers1)
+    

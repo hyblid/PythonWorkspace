@@ -2,13 +2,14 @@ from tkinter import Canvas
 from resources.paint_settings import *
 
 class DrawSurface(Canvas):
-    def __init__(self, parent, color_string, brush_float):
+    def __init__(self, parent, color_string, brush_float, erase_bool):
         super().__init__(master = parent, background=CANVS_BG, bd=0, highlightthickness=0, relief="ridge")
         self.pack(expand = True, fill = "both")
         
         #data
         self.color_string = color_string
         self.brush_float = brush_float
+        self.erase_bool = erase_bool
         self.allow_draw = False
         
         #start pos
@@ -29,7 +30,8 @@ class DrawSurface(Canvas):
             
     def create_brush_line(self, start, end):
         brush_size = self.brush_float.get() * 10 ** 2
-        self.create_line(start, end, fill ="black", width = brush_size, capstyle="round")
+        color = f"#{self.color_string.get()}" if not self.erase_bool.get() else "#FFF"
+        self.create_line(start, end, fill= color, width = brush_size, capstyle="round")
         
     
     def activate_draw(self,event):

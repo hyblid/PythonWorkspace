@@ -1,28 +1,12 @@
 from random import randrange, randint
 from enum import Enum, auto
+from python_challenges.array_utils import get_dimension, swap, print_array, get_at 
+numbers = [[1, 2, 3, 4],
+           [12, 13, 14, 5],
+           [11, 16, 15, 6],
+           [10, 9, 8, 7]]
 
-class Direction(Enum):
-    N = (0, -1)
-    NE = (1, -1)
-    E = (1, 0)
-    SE = (1, 1)
-    S = (0, 1)
-    SW = (-1, 1)
-    W = (-1, 0)
-    NW = (-1, -1)
+x, y = get_dimension(numbers)
+print(x,y)
 
-    def to_dx_dy(self):
-        return self.value
 
-    @classmethod
-    def provide_random_direction(cls):
-        random_index = randrange(len(list(Direction)))
-        return list(Direction)[random_index]
-            
-
-dir = Direction.provide_random_direction()
-print(dir)
-print("dx:", dir.value[0])
-print("dy:", dir.value[1])
-print("dx:", dir.to_dx_dy()[0])
-print("dx:", dir.to_dx_dy()[1])
