@@ -13,15 +13,20 @@ class App(ctk.CTk):
         # data
         self.color_string = ctk.StringVar(value="000")
         self.brush_float = ctk.DoubleVar(value=1) #0.2 -> 1
-        self.erase_bool = ctk.BooleanVar(value=False)
+        self.erase_bool = ctk.BooleanVar()
         
         #widgets
-        DrawSurface(self,self.color_string, self.brush_float, self.erase_bool)
-        ToolPanel(self, self.brush_float, self.color_string)
+        self.draw_surface = DrawSurface(self,self.color_string, self.brush_float, self.erase_bool)
+        ToolPanel(self, self.brush_float, self.color_string, self.erase_bool, self.clear_canvas)
+        self.erase_bool.set(False)
         
         #mousewheel event
         self.bind("<MouseWheel>", self.adjust_brush_size)
         self.mainloop()
+    
+    def clear_canvas(self):
+        self.draw_surface.delete("all")
+        
         
     def adjust_brush_size(self, event):
         #1.get a direction

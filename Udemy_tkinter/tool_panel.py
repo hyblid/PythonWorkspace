@@ -1,9 +1,10 @@
 import customtkinter as ctk
 from resources.paint_settings import *
 from PIL import Image
+from tkinter import Canvas
 
 class ToolPanel(ctk.CTkToplevel):
-    def __init__(self, parent, brsuh_float, color_string):
+    def __init__(self, parent, brsuh_float, color_string, erase_bool, clear_canvas):
         super().__init__()
         self.geometry("200x300")
         self.title("")
@@ -19,17 +20,66 @@ class ToolPanel(ctk.CTkToplevel):
         self.rowconfigure((2,3), weight=3, uniform='a')
         
         #widgets
+        BrushPreview(self, color_string, brsuh_float, erase_bool)
+        ColorSliderPanel(self, color_string, erase_bool)
         BrushSizeSlider(self, brsuh_float)
-        ColorPanel(self,color_string)
-        ColorSliderPanel(self, color_string)
-        Button(self, r"D:\test\PythonWorkspace\Udemy_tkinter\images\brush.png", 0)
-        # Button(self, "images/brush.png", 0)
+        ColorPanel(self,color_string, erase_bool)
+        DrawBrushButton(self, erase_bool)
+        EraserButton(self, erase_bool)
+        ClearAllButton(self, clear_canvas, erase_bool)
         
     def close_app(self):
         self.parent.quit()
+
+class BrushPreview(Canvas):
+    def __init__(self, parent, color_string, brush_float, erase_bool):
+        super().__init__(master=parent, background=BRUSH_PREVIEW_BG, bd=0, highlightthickness=0, relief="ridge")
+        self.grid(row=0, column =1 , columnspan=2, sticky="news")
+        
+        #data
+        self.color_string = color_string
+        self.brush_float = brush_float
+        self.erase_bool = erase_bool
+        
+        #canvas setup
+        self.x = 0
+        self.y = 0
+        self.max_length = 0
+                
+        #trace
+        self.brush_float.trace("w", self.update)
+        self.color_string.trace("w", self.update)
+        self.erase_bool.trace("w", self.update)
+        
+        self.bind("<Configure>", self.setup)
+        
+    def setup(self, event):
+        self.x = event.width/2
+        self.y = event.height/2
+        self.max_length = (event.height/2)*0.8
+        self.update()
+        
+    def update(self, *args):
+        #update preview circle
+        self.delete("all")
+        current_radius = self.max_length * self.brush_float.get()
+        #color
+        color = f"#{self.color_string.get()}" if not self.erase_bool.get() else BRUSH_PREVIEW_BG
+        #if the eraer is active the color should be the same as the bg, add a black circle
+        outline_color = f"#{self.color_string.get()}" if not self.erase_bool.get() else "black"
+        
+        
+        self.create_oval(self.x-current_radius,
+                        self.y- current_radius,
+                        self.x+current_radius,
+                        self.y+current_radius,
+                        fill = color,
+                        outline= outline_color,
+                        dash = 20)
+            
         
 class ColorSliderPanel(ctk.CTkFrame):
-    def __init__(self, parent, color_string):
+    def __init__(self, parent, color_string, erase_bool):
         super().__init__(master=parent)
         self.grid(row=0, column=0, sticky="news", padx=5, pady=5)
         #data
@@ -38,6 +88,7 @@ class ColorSliderPanel(ctk.CTkFrame):
         self.g_int =ctk.IntVar(value = self.color_string.get()[1])
         self.b_int =ctk.IntVar(value = self.color_string.get()[2])
         self.color_string.trace("w", self.set_color)
+        self.erase_bool = erase_bool
         
         #layout
         self.rowconfigure((0,1,2), weight=1, uniform="a")
@@ -54,6 +105,7 @@ class ColorSliderPanel(ctk.CTkFrame):
             case "g": current_color_list[1] = COLOR_RANGE[int(value)]
             case "b": current_color_list[2] = COLOR_RANGE[int(value)]
         self.color_string.set(f'{"".join(current_color_list)}')
+        self.erase_bool.set(False)
         
     def set_color(self, *arg):
         self.r_int.set(COLOR_RANGE.index(self.color_string.get()[0]))
@@ -61,7 +113,7 @@ class ColorSliderPanel(ctk.CTkFrame):
         self.b_int.set(COLOR_RANGE.index(self.color_string.get()[2]))
             
 class ColorPanel(ctk.CTkFrame):
-    def __init__(self, parent, color_string):
+    def __init__(self, parent, color_string, erase_bool):
         super().__init__(master=parent, fg_color="transparent")
         self.grid(row=1, column=0, columnspan=3, padx=5, pady=5)
         self.color_string = color_string 
@@ -73,13 +125,13 @@ class ColorPanel(ctk.CTkFrame):
         for row in range(COLOR_ROWS):
             for col in range(COLOR_COLS):
                 color = COLORS[row][col]
-                ColorFieldButton(self, row, col, color, self.pick_color)
+                ColorFieldButton(self, row, col, color, self.pick_color, erase_bool)
                 
     def pick_color(self, color):
         self.color_string.set(color)
 
 class ColorFieldButton(ctk.CTkButton):
-    def __init__(self,parent, row, col, color, pick_color):
+    def __init__(self,parent, row, col, color, pick_color, erase_bool):
         super().__init__(master=parent, 
                         text="", 
                         fg_color=f"#{color}", 
@@ -89,9 +141,11 @@ class ColorFieldButton(ctk.CTkButton):
         self.grid(row=row, column=col, padx=0.4, pady=0.4)
         self.pick_color = pick_color
         self.color = color
+        self.erase_bool = erase_bool
         
     def click_handler(self):
         self.pick_color(self.color)
+        self.erase_bool.set(False)
         
 class BrushSizeSlider(ctk.CTkFrame):
     def __init__(self, parent, bursh_float):
@@ -101,8 +155,52 @@ class BrushSizeSlider(ctk.CTkFrame):
         ctk.CTkSlider(self,variable= bursh_float, from_=0.2, to=1).pack(fill="x", expand=True, padx=5)
     
 class Button(ctk.CTkButton):
-    def __init__(self, parent, image_path,col):
+    def __init__(self, parent, image_path,col, func):
         image= ctk.CTkImage(light_image = Image.open(image_path), dark_image = Image.open(image_path)) 
         
-        super().__init__(master =parent, text="", image= image)
+        super().__init__(master=parent, command=func, text="", image= image, fg_color=BUTTON_COLOR, hover_color=BUTTON_HOVER_COLOR)
         self.grid(row= 3, column = col, sticky = "news", padx=5, pady=5)
+        
+class DrawBrushButton(Button):
+        def __init__(self,parent, erase_bool):
+            super().__init__(parent=parent,image_path=r"D:\test\PythonWorkspace\Udemy_tkinter\images\brush.png", 
+                            col = 0, func=self.activate_paint)
+            self.erase_bool = erase_bool
+            self.erase_bool.trace("w", self.update_state)
+    
+        def activate_paint(self):
+            self.erase_bool.set(False)
+            
+        def update_state(self, *args):
+            if not self.erase_bool.get():
+                self.configure(fg_color= BUTTON_ACTIVE_COLOR)
+            else:    
+                self.configure(fg_color= BUTTON_COLOR)    
+            
+class EraserButton(Button):
+        def __init__(self,parent, erase_bool):
+            super().__init__(parent=parent, image_path=r"D:\test\PythonWorkspace\Udemy_tkinter\images\eraser.png", 
+                            col = 1, func=self.activate_erase)
+            self.erase_bool = erase_bool
+            self.erase_bool.trace("w", self.update_state)
+        
+        def activate_erase(self):
+            self.erase_bool.set(True)
+            
+        def update_state(self, *args):
+            if self.erase_bool.get():
+                self.configure(fg_color= BUTTON_ACTIVE_COLOR)
+            else:    
+                self.configure(fg_color= BUTTON_COLOR)
+            
+class ClearAllButton(Button):
+        def __init__(self,parent, clear_canvas, erase_bool):
+            super().__init__(parent=parent, image_path=r"D:\test\PythonWorkspace\Udemy_tkinter\images\clear.png", 
+                            col = 2, func = self.clear_all)
+            self.clear_canvas = clear_canvas
+            self.erase_bool = erase_bool
+        
+        def clear_all(self):
+            self.clear_canvas()
+            self.erase_bool.set(False)
+            
