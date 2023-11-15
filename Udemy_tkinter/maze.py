@@ -36,6 +36,12 @@ class Maze:
                                     -(rowsInMaze-1)/2-.5,
                                     (columnsInMaze-1)/2+.5,
                                     (rowsInMaze-1)/2+.5)
+    """__getitem__() is a magic method in Python, which when used in a class, 
+    allows its instances to use the [] (indexer) operators. 
+    Say x is an instance of this class, then x[i] is roughly equivalent to type(x).__getitem__(x, i)"""    
+        
+    def __getitem__(self,idx):
+        return self.mazelist[idx]
 
     def drawMaze(self):
         self.t.speed(10)
@@ -96,10 +102,6 @@ class Maze:
                 col == 0 or
                 col == self.columnsInMaze-1 )
 
-    def __getitem__(self,idx):
-        return self.mazelist[idx]
-
-
 def searchFrom(maze, startRow, startColumn):
     # try each of four directions from this point until we find a way out.
     # base Case return values:
@@ -130,6 +132,6 @@ def searchFrom(maze, startRow, startColumn):
 
 myMaze = Maze('maze2.txt')
 myMaze.drawMaze()
-myMaze.updatePosition(myMaze.startRow,myMaze.startCol)
+myMaze.updatePosition(myMaze.startRow, myMaze.startCol)
 
 searchFrom(myMaze, myMaze.startRow, myMaze.startCol)
