@@ -415,5 +415,94 @@ def spiral_traversal(values2dim):
                 pos_x += 1
     print(results)
     return results
-spiral_traversal(numbers1)
+# spiral_traversal(numbers1)
+
+"""Q.6.2.8.Consider an array or a list of numbers representing the digits of a decimal number. 
+Write function add_one(digits) that performs an addition by the value 1 and is 
+only allowed to use arrays as a data structure for the solution.""" 
+def add_one(digits):
+    num_str = [str(n) for n in digits]
+    n = "".join(num_str)
+    result = [int(num) for num in str(int(n)+1)]
+    print(result)
+# add_one([9,9,9,9]) 
+"""Q.6.2.9.In this challenge, a Sudoku puzzle is examined to see if it is a valid solution. 
+Let’s assume a 9 × 9 array with int values. According to the Sudoku rules, each row and each column must contain 
+all numbers from 1 to 9. Besides, all numbers from 1 to 9 must, in turn, occur in each 3 × 3 subarray. 
+Write function is_sudoku_valid(board)for checking."""
+board_arr = [[[1,2,3],[4,5,6],[7,8,9]],[[4,5,6],[7,8,9],[1,2,3]],[[7,8,9],[1,2,3],[4,5,6]],
+            [[2,1,4],[3,6,5],[8,9,7]],[[3,6,5],[8,9,7],[2,1,4]],[[8,9,7],[2,1,4],[3,6,5]],
+            [[5,3,1],[6,4,2],[9,7,8]],[[6,4,2],[9,7,8],[5,3,1]],[[9,7,8],[5,3,1],[6,4,2]]]
+board_set = {1,2,3,4,5,6,7,8,9}
+def sudoku(board):
+    arr = []
+    result = True
+    for i in range(0,9):
+        for j in range(0,3):
+            for k in range(0,3):
+                arr.append(k)
+                print(f"[{i}][{j}][{k}],")    
+#individuals cells
+def is_sudoku_valid_cell(board):
+    arr = []
+    result = True
+    for i in board:
+        arr = []
+        for j in i:
+            for k in j:
+                arr.append(k)    
+        if len(board_set - set(arr)) != 0:
+            result = False
+        break
+    return result
+#row           
+def is_sudoku_valid_rank(board):
+    arr=[]
+    num1  = 0
+    num2  = 0
+    loop = 0
+    index = 0
+    result = True
+    while(loop < 9):        
+        for _ in range(9):
+            num1, num2 = sum_binary(num1, num2)
+            arr.append(board[index][num1][num2])
+            num2+=1
+        loop+=1
+        index+=1
+        num1 = 0
+        num2 = 0        
+        if len(board_set - set(arr)) != 0:
+            result = False
+            break
+        arr.clear()
+    return result 
+#column
+def is_sudoku_valid_stack(board):
+    arr=[]
+    num1  = 0
+    num2  = 0
+    loop = 0
+    result = True
+    while(loop < 9):        
+        for itr in range(9):
+            num1, num2 = sum_binary(num1, num2)
+            arr.append(board[itr][num1][num2])
+        num2+=1
+        loop+=1        
+        if len(board_set - set(arr)) != 0:
+            result = False
+            break
+        arr.clear()
+    return result        
+
+def sum_binary(num1, num2):
+    sum = num1 + num2
+    if num2 > 2:
+        num1 += 1
+        num2 = 0
+    return num1, num2
     
+print(is_sudoku_valid_rank(board_arr))
+# print(is_sudoku_valid_cell(board_arr))
+# print(is_sudoku_valid_stack(board_arr))
