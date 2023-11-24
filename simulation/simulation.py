@@ -29,6 +29,7 @@ def simulation(numSeconds, pagesPerMinute):
     averageWait=sum(waitingtimes)/len(waitingtimes)
     print("Average Wait {0:6.2f} secs {1:3d} tasks remaining.".format(averageWait,printQueue.size()))
 
+#generate new task
 def newPrintTask():
     num = random.randrange(1,181)
     if num == 180:
