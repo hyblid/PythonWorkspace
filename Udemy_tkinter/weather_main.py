@@ -5,6 +5,10 @@ from main_widgets import *
 import urllib.request
 import json
 from weather_data import get_weather
+#images
+from PIL import Image
+from os import walk
+
 try:
 	from ctypes import windll, byref, sizeof, c_int
 except:
@@ -18,6 +22,10 @@ class App(ctk.CTk):
         self.forecast_data = forecast_data
         self.location = {"city":city, "country":country}
         self.color = WEATHER_DATA[current_data["weather"]]
+        
+        #imgae inports
+        self.forecast_images = [Image.open(f"Udemy_tkinter/images/{info['weather']}.png") for info in self.forecast_data.values()]
+        self.today_animation = self.import_folder(self.color['path'])
         
         super().__init__(fg_color= self.color["main"])
         self.title_bar_color(self.color["title"])
@@ -40,6 +48,14 @@ class App(ctk.CTk):
         self.full_width_bool.trace("w", self.change_size)
         self.full_height_bool.trace("w", self.change_size)
         self.mainloop()
+        
+        def import_folder(self, path):
+            for _, __, image_data in walk(path):
+                sorted_data = sorted(image_data, key = lambda item:int(item.split('.')[0]))
+                image_paths = [path + '/' + item for item in sorted_data]
+
+            images = [Image.open(path) for path in image_paths]
+            return images        
         
     def title_bar_color(self, color):
         try:
@@ -74,16 +90,34 @@ class App(ctk.CTk):
         
         #max widget
         if self.full_height_bool.get() and self.full_width_bool.get():
-            self.widget = MaxWidget(self)
+            self.widget = MaxWidget(self,
+                current_data= self.current_data,
+                forecast_data = self.forecast_data,
+                location = self.location,
+                color = self.color,
+                forecast_images = self. forecast_images,
+                animation = self.today_animation)
         #tall widget
         if self.full_height_bool.get() and not self.full_width_bool.get():
-            self.widget = TallWidget(self)
+            self.widget = TallWidget(self,                
+                current_data= self.current_data,
+                forecast_data = self.forecast_data,
+                location = self.location,
+                color = self.color,
+                forecast_images = self. forecast_images,
+                animation = self.today_animation)
         #wide widget
         if not self.full_height_bool.get() and self.full_width_bool.get():
-            self.widget = WideWidget(self)
+            self.widget = WideWidget(self,
+                current_data= self.current_data,
+                forecast_data = self.forecast_data,
+                location = self.location,
+                color = self.color,
+                forecast_images = self. forecast_images,
+                animation = self.today_animation)
         #min widget    
         if not self.full_height_bool.get() and not self.full_width_bool.get():
-            self.widget = SmallWidget(self)
+            self.widget = SmallWidget(self, self.current_data, self.location, self.color,)
 
 if __name__ == '__main__':
     #location
